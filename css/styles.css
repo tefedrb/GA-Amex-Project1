@@ -14,18 +14,29 @@ body {
 /* #93a8b5 */
 /* --------header styles ------------ */
 header {
-width: 100%;
-position: fixed;
+  width: 100%;
+  position: fixed;
 }
 
-div.navbar {
-  background-color: #f5f9fa;
-  border-bottom: 8px solid #0aa5ff;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  width: 100%;
+.navbar {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  background-color: #f5f9fa;
+  border-bottom: 8px solid #0aa5ff;
+  padding: 1.6em 1.5em;
+}
+
+.logo-wrap {
+  display: flex;
+}
+
+.logo-wrap div {
+  width: 151px;
+}
+
+.logo-wrap a {
+  margin-right: .5em;
 }
 
 h1.logo {
@@ -33,21 +44,18 @@ h1.logo {
   color: #daf250;
   font-size: 1.8em;
   font-weight: 900;
-  margin-left: 0px;
 }
+
 h2.sub-logo {
   font-size: .8em;
-  margin-left: -150px;
-  margin-bottom: -40px;
 }
+
 .igloo {
   cursor: pointer;
   color: #69d2ff;
   font-size: 2.5em;
 }
-nav {
-  margin: 0 100px;
-}
+
 input[type=text],input[type=password],input[class=username] {
   height: 18px;
   width: 140px;
@@ -59,11 +67,6 @@ input[type=submit]{
   width: 80PX;
   height: 30px;
 
-}
-form.signupForm {
-  font-family:'Raleway', sans-serif;
-  font-weight: normal;
-  margin-left: 320px;
 }
 
 #input-createPost {
