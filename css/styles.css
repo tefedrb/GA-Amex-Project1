@@ -14,27 +14,51 @@ body {
 /* #93a8b5 */
 /* --------header styles ------------ */
 header {
-
+width: 100%;
+position: fixed;
 }
 
 div.navbar {
   background-color: #f5f9fa;
   border-bottom: 8px solid #0aa5ff;
+  padding-top: 30px;
   padding-bottom: 30px;
-   /* Position the navbar at the top of the page */
   width: 100%;
+  display: flex;
+  align-items: center;
+
+
+}
+.brand {
+font-size: 1.8em;
+color:#0aa5ff;
+padding-left: 60px;
 }
 
 h1.logo {
-  font-family:'Raleway', sans-serif;
+  font-family: 'Anton', sans-serif;
   color: #daf250;
-  font-size: 1.5em;
+  font-size: 1.8em;
   font-weight: 900;
+  margin-left: 0px;
+}
+h2.sub-logo {
+  font-size: .8em;
+  margin-left: -150px;
+  margin-bottom: -40px;
 }
 
-form.login-style {
+nav {
+  margin: 0 100px;
+}
+form.signupForm {
   font-family:'Raleway', sans-serif;
   font-weight: normal;
+  margin-left: 320px;
+}
+
+.btn-1 {
+
 }
 
 #input-createPost {
@@ -47,5 +71,64 @@ form.login-style {
 .containerLanding {
   display: flex;
   flex-direction: column;
-  width: 800px;
+  width: 650px;
+  padding-left: 90px;
+  padding-top: 100px;
+}
+
+article {
+  width: 700px;
+  height: 700px;
+  margin: 20px;
+}
+
+article.box-2 {
+  width: 700px;
+  height: 250px;
+  margin: 20px;
+  box-shadow: 10px 10px 30px grey;
+}
+.content {
+  width: 640px;
+  height:600px;
+  margin-left: 30px;
+}
+.comment {
+  font-size: 2em;
+  color: #daf250;
+  font-weight: 600;
+  margin-top: 30px;
+  padding-right: 20px;
+}
+.box-1 {
+  box-shadow: 10px 10px 30px grey;
+}
+.top-bar {
+  width: 700px;
+  height: 40px;
+  background-color:#f5f9fa;
+  display: flex;
+  align-items: center;
+}
+.user-icon {
+  width: 30px;
+  height: 30px;
+  background-color: yellow;
+  margin-left: 20px;
+}
+.user-icon2 {
+  width: 30px;
+  height: 30px;
+  background-color: #4671bd;
+  margin-left: 20px;
+}
+
+.active {
+  margin:40px auto;
+}
+
+h3 {
+  font-size: .8em;
+  margin-left: 90px;
+
 }
