@@ -1,4 +1,8 @@
 const userNameDOM = document.querySelector('#user');
+const classIn = document.querySelector('.email');
+const passwordIn = document.querySelector('.password');
+const userNameIn = document.querySelector('.username');
+
 console.log("hello")
 
 const testUser1 = {
@@ -9,18 +13,23 @@ const testUser1 = {
 
 let userToken = null;
 
-const signUp = (user) => {
+const signUp = (email, pass, user) => {
   fetch('http://thesi.generalassemb.ly:8080/signup', {
     method: 'POST',
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(user)
+    body: JSON.stringify({
+      email: email,
+      password: pass,
+      username: user
+    })
   })
   .then(response => response.json())
   .then(response => {
     console.log('Sign Up', response);
     userToken = response.token;
+    logIn(email, pass);
   })
   .catch(error => {
     console.log(error);
@@ -132,4 +141,17 @@ const deleteComment = () => {
   .catch(error => {
     console.log(error);
   })
+};
+
+const postData = (event) => {
+  event.preventDefault();
+  const emailIn = event.target[0].value;
+  const passIn = event.target[1].value;
+  const userIn = event.target[2].value;
+  emailIn.includes('@') ? signUp(emailIn, passIn, userIn) :
+  alert("You need to enter a valid email address");
+};
+
+const userPage = () => {
+
 };
