@@ -1,6 +1,7 @@
 * {
   font-family:'Raleway', sans-serif;
   margin: 0;
+  padding: 0;
 }
 /* -------body styles-------- */
 body {
@@ -57,8 +58,9 @@ h2.sub-logo {
 }
 
 input[type=text],input[type=password],input[class=username] {
-  height: 18px;
-  width: 140px;
+  height: 1.5em;
+  width: 10em;
+  padding: 0 .5em;
 }
 
 input[type=submit]{
@@ -69,9 +71,14 @@ input[type=submit]{
 
 }
 
+.createPost {
+  margin-top: 5em;
+  margin-bottom: 3em;
+}
+
 #input-createPost {
-  margin: 80px 0;
-  width: 800px;
+  padding: 0 2em;
+  width: 65em;
   height: 30px;
   border: 1.8px solid #daf250;
 }
@@ -86,21 +93,22 @@ input[type=submit]{
 
 article {
   width: 700px;
-  height: 700px;
+  height: 100%;
+  margin: 1.5em;
+  box-shadow: 10px 10px 30px grey;
   margin: 20px;
 }
 
-article.box-2 {
-  width: 700px;
-  height: 250px;
-  margin: 20px;
-  box-shadow: 10px 10px 30px grey;
-}
 .content {
   width: 640px;
-  height:600px;
-  margin-left: 30px;
+  margin: 0 30px;
 }
+
+.content img {
+  margin: 1em 0;
+  width: 100%;
+}
+
 .comment {
   font-size: 2em;
   color: #daf250;
@@ -108,9 +116,7 @@ article.box-2 {
   margin-top: 30px;
   padding-right: 20px;
 }
-.box-1 {
-  box-shadow: 10px 10px 30px grey;
-}
+
 .top-bar {
   width: 700px;
   height: 40px;
@@ -118,12 +124,14 @@ article.box-2 {
   display: flex;
   align-items: center;
 }
+
 .user-icon {
   width: 30px;
   height: 30px;
   background-color: yellow;
   margin-left: 20px;
 }
+
 .user-icon2 {
   width: 30px;
   height: 30px;
@@ -139,7 +147,7 @@ article.box-2 {
 }
 
 .active {
-  margin:40px auto;
+  margin: 1.5em auto;
 }
 
 h3 {
@@ -156,12 +164,14 @@ input[class=title]{
   width: 700px;
   height: 30px;
 }
+
 textarea {
   width: 700px;
   height: 100px;
   resize: none;
   margin-top: 10px;
 }
+
 footer {
   background-color: #0aa5ff;
   color: #000;
