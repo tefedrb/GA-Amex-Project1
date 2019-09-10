@@ -4,7 +4,7 @@
 }
 /* -------body styles-------- */
 body {
-  height: 100vh;
+  height: 200vh;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -32,7 +32,7 @@ div.navbar {
 .brand {
 font-size: 1.8em;
 color:#0aa5ff;
-padding-left: 60px;
+padding-left: 10px;
 }
 
 h1.logo {
@@ -51,15 +51,25 @@ h2.sub-logo {
 nav {
   margin: 0 100px;
 }
+input[type=text],input[type=password],input[class=username] {
+  height: 18px;
+  width: 140px;
+}
+
+input[type=submit]{
+  background-color: #FFFFFF;
+  border: 3px solid #0aa5ff;
+  width: 80PX;
+  height: 30px;
+
+}
 form.signupForm {
   font-family:'Raleway', sans-serif;
   font-weight: normal;
   margin-left: 320px;
 }
 
-.btn-1 {
 
-}
 
 #input-createPost {
   margin: 80px 0;
@@ -71,8 +81,8 @@ form.signupForm {
 .containerLanding {
   display: flex;
   flex-direction: column;
-  width: 650px;
-  padding-left: 90px;
+  align-items: center;
+  width: 100%;
   padding-top: 100px;
 }
 
@@ -123,12 +133,34 @@ article.box-2 {
   margin-left: 20px;
 }
 
+.user-icon3 {
+  width: 30px;
+  height: 30px;
+  background-color: pink;
+  margin-left: 20px;
+}
+
 .active {
   margin:40px auto;
 }
 
 h3 {
   font-size: .8em;
-  margin-left: 90px;
+  margin-left: 10px;
+}
 
+/* ________post styles___________ */
+.container-post {
+  margin-left: 20px;
+}
+
+input[class=title]{
+  width: 700px;
+  height: 30px;
+}
+textarea {
+  width: 700px;
+  height: 100px;
+  resize: none;
+  margin-top: 10px;
 }
