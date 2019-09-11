@@ -1,3 +1,16 @@
+// SIGN UP - POST (22) - noauth
+// CREATE COMMENT - POST (59) - bearer
+// CREATE POST - POST (104) - bearer
+// CREATE PROFILE - POST (148) - bearer
+// LIST ALL POSTS - GET (192) - noauth
+// GET COMMENTS BY POST ID - GET (226) - bearer
+// DELETE COMMENTS - DELETE (261) - bearer
+// DELETE POSTS - DELETE (302) - bearer
+// GET PROFILE - GET (343) - bearer
+// LOGIN - POST (383) - noauth
+// GET COMMENTS BY USER - GET (420) - bearer
+// GET POSTS BY USER - GET (461) - bearer
+// UPDATE PROFILE - POST (502) - bearer
 {
 	"info": {
 		"_postman_id": "325c8472-525a-43ef-b5f2-fdfe0d8355a5",
