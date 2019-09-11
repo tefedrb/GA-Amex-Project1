@@ -11,7 +11,8 @@
   </head>
   <body>
     <header>
-      <div class="navbar">
+      <i class="settings-icon fa fa-cogs" aria-hidden="true"></i>
+      <div class="header-wrap">
         <div class="logo-wrap">
           <a><i class="igloo fas fa-igloo "></i></a>
           <div>
@@ -39,6 +40,20 @@
         </form>
       </div>
     </header>
+    <section id="update-profile-fly-out">
+      <div>
+
+      </div>
+    </section>
+    <section class="create-profile">
+      <div>
+        <form class="profile-form" onSubmit="createProfile(event)">
+          <input id="create-backup-email" type="text" placeholder="Add backup email"/>
+          <input id="create-mobile" type="text" placeholder="Mobile"/>
+          <input id="create-address" type="text" placeholder="Address"/>
+        </form>
+      </div>
+    </section>
     <div class="containerLanding">
       <div class="createPost">
         <input id="input-createPost" name="text" placeholder="CREATE POST">
@@ -102,13 +117,9 @@
         </div>
     	</article>
     </div>
-
-
-
-      <script type="text/javascript" src="js/main.js"></script>
-    </header>
     <footer>
       <p>&copy; 2019 TRAVEL BUDDY</p>
     </footer>
+    <script type="text/javascript" src="js/main.js"></script>
   </body>
 </html>

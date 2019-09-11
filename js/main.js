@@ -2,6 +2,9 @@ const userNameDOM = document.querySelector('#user');
 const classIn = document.querySelector('.email');
 const passwordIn = document.querySelector('.password');
 const userNameIn = document.querySelector('.username');
+const settings = document.querySelector('.settings-icon');
+const dropDownMenu = document.querySelector('.create-profile');
+
 
 console.log("hello")
 
@@ -155,3 +158,11 @@ const postData = (event) => {
 const userPage = () => {
 
 };
+
+settings.addEventListener('click', function(e){
+  if(dropDownMenu.classList.contains('create-profile-slide')){
+    dropDownMenu.classList.remove('create-profile-slide');
+  } else {
+    dropDownMenu.classList.add('create-profile-slide');
+  }
+})
