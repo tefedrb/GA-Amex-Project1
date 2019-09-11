@@ -20,24 +20,39 @@
             <h2 class="sub-logo">TRAVEL FORUM</h2>
           </div>
         </div>
-        <form onSubmit="postData(event)" class="signupForm">
-          <input
-              type="text"
-              class="email"
-              placeholder="EMAIL"
-          />
-          <input
-              type="password"
-              class="password"
-              placeholder="PASSWORD"
-          />
-          <input
-              type="text"
-              class="username"
-              placeholder="USERNAME"
-          />
-          <input class="sub" type="submit" value="SIGN UP"/>
-        </form>
+        <div class="signUpLogIn">
+          <form onSubmit="signUp(event)" class="signUpForm">
+            <input
+                type="text"
+                class="email collapseInputs"
+                placeholder="EMAIL"
+            />
+            <input
+                type="password"
+                class="password collapseInputs"
+                placeholder="PASSWORD"
+            />
+            <input
+                type="text"
+                class="username collapseInputs"
+                placeholder="USERNAME"
+            />
+            <button class="sub" type="submit">SIGN UP</button>
+          </form>
+          <form onSubmit="logIn(event)" class="loginForm">
+            <input
+                type="text"
+                class="email"
+                placeholder="EMAIL"
+            />
+            <input
+                type="password"
+                class="password"
+                placeholder="PASSWORD"
+            />
+            <button class="sub" type="submit">LOG IN</button>
+          </form>
+        </div>
       </div>
     </header>
     <section id="update-profile-fly-out">
@@ -51,6 +66,7 @@
           <input id="create-backup-email" type="text" placeholder="Add backup email"/>
           <input id="create-mobile" type="text" placeholder="Mobile"/>
           <input id="create-address" type="text" placeholder="Address"/>
+          <input class="sub" type="submit" value="SAVE PROFILE">
         </form>
       </div>
     </section>
