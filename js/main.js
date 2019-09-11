@@ -12,6 +12,7 @@ const logInForm = document.querySelector('.logInForm');
 
 console.log("hello")
 
+
 const switchPages = () => {
   const urlArry = window.location.href.split('/');
   const newUrl = urlArry.slice(0,urlArry.length-1)
