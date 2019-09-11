@@ -16,7 +16,7 @@ const testUser1 = {
 
 let userToken = null;
 
-const signUp = (email, pass, user) => {
+const newUser = (email, pass, user) => {
   fetch('http://thesi.generalassemb.ly:8080/signup', {
     method: 'POST',
     headers: {
@@ -32,14 +32,25 @@ const signUp = (email, pass, user) => {
   .then(response => {
     console.log('Sign Up', response);
     userToken = response.token;
-    logIn(email, pass);
+    existingUser(email, pass);
   })
   .catch(error => {
     console.log(error);
   })
 };
 
-const logIn = (email, pass) => {
+const signUp = (event) => {
+  event.preventDefault();
+  const emailIn = event.target[0].value;
+  const passIn = event.target[1].value;
+  const userIn = event.target[2].value;
+  emailIn.includes('@') ? newUser(emailIn, passIn, userIn) :
+  alert("You need to enter a valid email address");
+};
+
+// Seems like when you login, the token is unique and persists
+// throughout the rest of the items that require authentication
+const existingUser = (email, pass) => {
   fetch('http://thesi.generalassemb.ly:8080/login', {
     method: 'POST',
     headers: {
@@ -55,13 +66,25 @@ const logIn = (email, pass) => {
   .then(response => {
     console.log('Login', response);
     userToken = response.token;
+    localStorage.token = userToken;
   })
   .catch(error => {
     console.log(error);
   })
 };
 
-const createProfile = (additionalEmail, mobile, address) => {
+const logIn = (event) => {
+  event.preventDefault();
+  const email = event.target[0].value;
+  const pass = event.target[0].value;
+  existingUser(email, pass);
+};
+
+const createProfile = (event) => {
+  event.preventDefault();
+  const backupEmail = event.target[0].value;
+  const mobile = event.target[1].value;
+  const address = event.target[2].value;
   fetch('http://thesi.generalassemb.ly:8080/profile', {
     method: 'POST',
     headers: {
@@ -69,7 +92,7 @@ const createProfile = (additionalEmail, mobile, address) => {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      additionalEmail: additionalEmail,
+      additionalEmail: backupEmail,
       mobile: mobile,
       address: address
     })
@@ -83,7 +106,8 @@ const createProfile = (additionalEmail, mobile, address) => {
   })
 };
 
-const createPost = (title, description,) => {
+
+const createPost = (title, description) => {
   fetch('http://thesi.generalassemb.ly:8080/post/3/comment', {
     method: 'POST',
     headers: {
@@ -146,14 +170,9 @@ const deleteComment = () => {
   })
 };
 
-const postData = (event) => {
-  event.preventDefault();
-  const emailIn = event.target[0].value;
-  const passIn = event.target[1].value;
-  const userIn = event.target[2].value;
-  emailIn.includes('@') ? signUp(emailIn, passIn, userIn) :
-  alert("You need to enter a valid email address");
-};
+
+
+
 
 const userPage = () => {
 

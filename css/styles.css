@@ -22,6 +22,8 @@ header {
 }
 
 .settings-icon{
+  /* temp */
+  display: none !important;
   position: absolute;
   top: .7em;
   right: 2em;
@@ -67,8 +69,9 @@ h1.logo {
 h2.sub-logo {
   font-size: .8em;
 }
-.user-pic{
-margin-right: 100px;
+
+.user-pic {
+  margin-right: 100px;
 }
 
 .igloo {
@@ -77,17 +80,47 @@ margin-right: 100px;
   font-size: 2.5em;
 }
 
-input[type=text],input[type=password],input[class=username] {
+/* input[type=text],input[type=password],input[class=username] {
+  height: 1.5em;
+  width: 10em;
+  padding: 0 .5em;
+} */
+
+button {
+  position: relative;
+  background-color: #FFFFFF;
+  border: 3px solid #0aa5ff;
+  width: 80PX;
+  height: 30px;
+}
+
+input {
+  transition: all .5s ease-in-out;
+}
+
+.signUpLogIn {
+  display: flex;
+}
+
+.signUpForm {
+  margin-right: .5em;
+}
+
+.collapseInputs {
+  position: relative;
+  width: 0px;
+  left: 6em;
+  padding: 0;
+}
+
+.showInputs {
   height: 1.5em;
   width: 10em;
   padding: 0 .5em;
 }
 
-input[type=submit]{
-  background-color: #FFFFFF;
+.selectedForm {
   border: 3px solid #0aa5ff;
-  width: 80PX;
-  height: 30px;
 }
 
 .create-profile {
