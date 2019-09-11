@@ -51,33 +51,31 @@
               placeholder="TITLE"
           />
           <textarea class="description" placeholder="COMMENT HERE"></textarea>
-          <input type="submit" value="SUBMIT"/>
+          <button class="postComment" type="submit">POST</button>
       </form>
       </div>
-      <article>
+      <article class="post-temp">
         <div class="top-bar">
-          <div class="user-icon"></div>
-          <h3></h2>
+          <div class="user-icon4"></div>
+          <!-- USERNAME TO POPULATE HERE -->
+          <h3 class="messageUserName"></h3>
         </div>
         <div class="content">
-
-      		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-            nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-            officia deserunt mollit anim id est laborum.</p>
+          <!-- MESSAGE TO POPULATE HERE -->
+          <p class="message"></p>
       		<div class="active">
-            <a class="comment" href="#"><i class="far fa-comment-alt"></i></a>
-            <a class="comment" href="#"><i class="fas fa-trash"></i></i></a>
+            <a class="comment" onclick="revealComment()"><i class="far fa-comment-alt"></i></a>
+            <a class="comment trash"><i class="fas fa-trash"></i></i></a>
+            <div class="cmntBtn" >
+            <textarea class="post-comment" placeholder="COMMENT POST"></textarea>
+            <button class="com-postbtn" type="submit">POST</button>
           </div>
         </div>
     	</article>
-
     </div>
     <footer>
       <p>&copy; 2019 TRAVEL BUDDY</p>
     </footer>
-    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/user.js"></script>
   </body>
 </html>
