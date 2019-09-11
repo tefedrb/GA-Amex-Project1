@@ -100,10 +100,21 @@ input {
 
 .signUpLogIn {
   display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* .signUpLogIn form {
+  display: flex;
+
+} */
+
+.signUpForm {
+  margin-bottom: .2em;
 }
 
 .signUpForm {
-  margin-right: .5em;
+
 }
 
 .collapseInputs {
@@ -114,9 +125,14 @@ input {
 }
 
 .showInputs {
+  position: static;
   height: 1.5em;
   width: 10em;
   padding: 0 .5em;
+}
+
+.showInputs2 {
+  display:
 }
 
 .selectedForm {
