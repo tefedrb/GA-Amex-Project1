@@ -10,8 +10,18 @@ const signUpBtn = document.querySelector('.signUpBtn');
 const signUpForm = document.querySelector('.signUpForm');
 const logInForm = document.querySelector('.logInForm');
 
-
 console.log("hello")
+
+const switchPages = () => {
+  const urlArry = window.location.href.split('/');
+  const newUrl = urlArry.slice(0,urlArry.length-1)
+  .join('/');
+  if(window.location.href.includes('index.html')){
+    location.replace(newUrl + '/userProfile.html');
+  } else {
+    location.replace(newUrl + '/index.html');
+  }
+};
 
 const testUser1 = {
   email: "TestThis10@someplace.com",
@@ -175,10 +185,6 @@ const deleteComment = () => {
     console.log(error);
   })
 };
-
-
-
-
 
 const userPage = () => {
 
