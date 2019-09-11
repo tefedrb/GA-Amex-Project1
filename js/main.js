@@ -4,6 +4,11 @@ const passwordIn = document.querySelector('.password');
 const userNameIn = document.querySelector('.username');
 const settings = document.querySelector('.settings-icon');
 const dropDownMenu = document.querySelector('.create-profile');
+const setUserForm = document.querySelector('.signUpLogIn');
+const logInBtn = document.querySelector('.logInBtn');
+const signUpBtn = document.querySelector('.signUpBtn');
+const signUpForm = document.querySelector('.signUpForm');
+const logInForm = document.querySelector('.logInForm');
 
 
 console.log("hello")
@@ -41,6 +46,7 @@ const newUser = (email, pass, user) => {
 
 const signUp = (event) => {
   event.preventDefault();
+  console.log(event);
   const emailIn = event.target[0].value;
   const passIn = event.target[1].value;
   const userIn = event.target[2].value;
@@ -184,4 +190,27 @@ settings.addEventListener('click', function(e){
   } else {
     dropDownMenu.classList.add('create-profile-slide');
   }
-})
+});
+
+setUserForm.addEventListener('mouseover', function(e){
+    if(e.target === signUpBtn){
+      for(let i = 0; i < 3; i++){
+        signUpForm.children[i].classList.add('showInputs');
+        signUpForm.children[i].classList.remove('collapseInputs');
+      }
+      for(let i = 0; i < 2; i++){
+        logInForm.children[i].classList.remove('showInputs');
+        logInForm.children[i].classList.add('collapseInputs');
+      }
+    }
+    if(e.target === logInBtn){
+      for(let i = 0; i < 3; i++){
+        signUpForm.children[i].classList.remove('showInputs');
+        signUpForm.children[i].classList.add('collapseInputs');
+      }
+      for(let i = 0; i < 2; i++){
+        logInForm.children[i].classList.add('showInputs');
+        logInForm.children[i].classList.remove('collapseInputs');
+      }
+    }
+});
