@@ -13,6 +13,7 @@ body {
 }
 
 /* #93a8b5 */
+/* #edfcff f5f9fa */
 /* --------header styles ------------ */
 header {
   z-index: 2;
@@ -23,11 +24,12 @@ header {
 .settings-icon{
   position: absolute;
   top: .7em;
-  right: 1.4em;
+  right: 2em;
   cursor: pointer;
   color: #daf250;
   opacity: .6;
   transition: all .5s ease;
+  font-size: 2.1em;
 }
 
 .settings-icon:hover {
@@ -38,7 +40,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #f5f9fa;
+  background-color: #e8f7fa;
   border-bottom: 8px solid #0aa5ff;
   padding: 1.6em 1.5em;
 }
@@ -64,6 +66,9 @@ h1.logo {
 
 h2.sub-logo {
   font-size: .8em;
+}
+.user-pic{
+margin-right: 100px;
 }
 
 .igloo {
@@ -158,7 +163,7 @@ article {
 }
 
 .comment {
-  font-size: 2em;
+  font-size: 1.5em;
   color: #daf250;
   font-weight: 600;
   margin-top: 30px;
@@ -168,7 +173,7 @@ article {
 .top-bar {
   width: 700px;
   height: 40px;
-  background-color:#f5f9fa;
+  background-color:#edfcff;
   display: flex;
   align-items: center;
 }
@@ -205,12 +210,18 @@ h3 {
 
 /* ________post styles___________ */
 .container-post {
-  margin-left: 20px;
+  width: 700px;
+  height: 100%;
+  margin: 1.5em;
+  margin: 20px;
 }
 
 input[class=title]{
-  width: 700px;
+  width: 689px;
   height: 30px;
+  height: 30px;
+  border: 1.8px solid #daf250;
+  font-size: 1em;
 }
 
 textarea {
@@ -218,6 +229,9 @@ textarea {
   height: 100px;
   resize: none;
   margin-top: 10px;
+  font-size: 1em;
+  border: 1.8px solid #daf250;
+  overflow-y: scroll;
 }
 
 footer {
