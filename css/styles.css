@@ -14,7 +14,7 @@ body {
 
 /* #93a8b5 */
 /* #edfcff f5f9fa */
-/* --------header styles ------------ */
+/* --------header styles ------- */
 header {
   z-index: 2;
   width: 100%;
@@ -22,11 +22,12 @@ header {
 }
 
 .settings-icon{
-  /* temp */
-  display: none !important;
+  /* !important is temporary */
+  display: none;
   position: absolute;
   top: .7em;
-  right: 2em;
+  /* right: 2em; */
+  right: 22em;
   cursor: pointer;
   color: #daf250;
   opacity: .6;

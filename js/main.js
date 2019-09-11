@@ -10,9 +10,6 @@ const signUpBtn = document.querySelector('.signUpBtn');
 const signUpForm = document.querySelector('.signUpForm');
 const logInForm = document.querySelector('.logInForm');
 
-console.log("hello")
-
-
 const switchPages = () => {
   const urlArry = window.location.href.split('/');
   const newUrl = urlArry.slice(0,urlArry.length-1)
@@ -24,15 +21,9 @@ const switchPages = () => {
   }
 };
 
-const testUser1 = {
-  email: "TestThis10@someplace.com",
-  password: "123452239",
-  username: "HipHopJoe9"
-}
-
 let userToken = null;
 
-const newUser = (email, pass, user) => {
+const signUp = (email, pass, user) => {
   fetch('http://thesi.generalassemb.ly:8080/signup', {
     method: 'POST',
     headers: {
@@ -48,26 +39,26 @@ const newUser = (email, pass, user) => {
   .then(response => {
     console.log('Sign Up', response);
     userToken = response.token;
-    existingUser(email, pass);
+    logIn(email, pass);
   })
   .catch(error => {
     console.log(error);
   })
 };
 
-const signUp = (event) => {
+const newUser = (event) => {
   event.preventDefault();
   console.log(event);
   const emailIn = event.target[0].value;
   const passIn = event.target[1].value;
   const userIn = event.target[2].value;
-  emailIn.includes('@') ? newUser(emailIn, passIn, userIn) :
+  emailIn.includes('@') ? signUp(emailIn, passIn, userIn) :
   alert("You need to enter a valid email address");
 };
 
 // Seems like when you login, the token is unique and persists
 // throughout the rest of the items that require authentication
-const existingUser = (email, pass) => {
+const logIn = (email, pass) => {
   fetch('http://thesi.generalassemb.ly:8080/login', {
     method: 'POST',
     headers: {
@@ -90,11 +81,11 @@ const existingUser = (email, pass) => {
   })
 };
 
-const logIn = (event) => {
+const captureLogin = (event) => {
   event.preventDefault();
   const email = event.target[0].value;
   const pass = event.target[0].value;
-  existingUser(email, pass);
+  logIn(email, pass);
 };
 
 const createProfile = (event) => {
@@ -117,12 +108,12 @@ const createProfile = (event) => {
   .then(response => response.json())
   .then(response => {
     console.log('Create Profile', response);
+    localStorage.profile = response;
   })
   .catch(error => {
     console.log(error);
   })
 };
-
 
 const createPost = (title, description) => {
   fetch('http://thesi.generalassemb.ly:8080/post/3/comment', {
