@@ -82,11 +82,17 @@ const updateProfile = () => {
   }
 };
 
-function domComments(){
+function domComments(title, description){
   document.querySelector('.postForm').style.display = "block";
+  console.log(event, 'alksdjflkasjflk')
+
   const parentNode = document.querySelector('.containerLanding');
   const postTemp = document.querySelector('.post-temp');
   const newTemp = postTemp.cloneNode(true);
+    // ADD USER NAME
+  // newTemp.querySelector('.messageUserName').innerText =
+  newTemp.querySelector('.titleMsg').innerText = title;
+  newTemp.querySelector('.message').innerText = description;
   parentNode.appendChild(newTemp);
 };
 
@@ -94,6 +100,8 @@ const createPost = (event) => {
   event.preventDefault();
   const title = event.target.children[0].value;
   const description = event.target.children[1].value;
+  domComments(title, description);
+  console.log(typeof title, typeof description, 'TITLE AND DESCRIPTION')
   fetch('http://thesi.generalassemb.ly:8080/post', {
     method: 'POST',
     headers: {
@@ -107,7 +115,6 @@ const createPost = (event) => {
   })
   .then(res => {
       console.log(res);
-      domComments();
   })
   .catch((err) => {
       console.log(err);
