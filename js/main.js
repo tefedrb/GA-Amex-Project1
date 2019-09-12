@@ -24,7 +24,12 @@ const switchPages = () => {
 let loginToken = localStorage.loginToken;
 let signUpToken = localStorage.signUpToken;
 
+const saveUserName = (user) => {
+  localStorage.userName = user
+};
+
 const signUp = (email, pass, user) => {
+  saveUserName(user)
   fetch('http://thesi.generalassemb.ly:8080/signup', {
     method: 'POST',
     headers: {
@@ -77,6 +82,7 @@ const logIn = (email, pass) => {
     console.log('Login', response);
     loginToken = response.token;
     localStorage.loginToken = loginToken;
+    switchPages()
   })
   .catch(error => {
     console.log(error);
@@ -87,6 +93,10 @@ const captureLogin = (event) => {
   event.preventDefault();
   const email = event.target[0].value;
   const pass = event.target[0].value;
+  if(!email || !pass){
+    // ADD FRIENDLY MESSAGE
+    return
+  }
   logIn(email, pass);
 };
 

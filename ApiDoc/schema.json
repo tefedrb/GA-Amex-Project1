@@ -1,5 +1,5 @@
-// SIGN UP - POST (22) - noauth
-// CREATE COMMENT - POST (59) - bearer
+// SIGN UP - POST (22) - noauth ***************
+// CREATE COMMENT - POST (59) - bearer **********
 // CREATE POST - POST (104) - bearer
 // CREATE PROFILE - POST (148) - bearer
 // LIST ALL POSTS - GET (192) - noauth
@@ -7,7 +7,7 @@
 // DELETE COMMENTS - DELETE (261) - bearer
 // DELETE POSTS - DELETE (302) - bearer
 // GET PROFILE - GET (343) - bearer
-// LOGIN - POST (383) - noauth
+// LOGIN - POST (383) - noauth ***************
 // GET COMMENTS BY USER - GET (420) - bearer
 // GET POSTS BY USER - GET (461) - bearer
 // UPDATE PROFILE - POST (502) - bearer

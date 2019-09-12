@@ -13,7 +13,11 @@ const signUpForm = document.querySelector('.signUpForm');
 const logInForm = document.querySelector('.logInForm');
 
 const userToken = localStorage.loginToken;
+const addUserProfile = () => {
+  document.querySelector('#innerUser').innerText = localStorage.userName;
+};
 
+addUserProfile();
 
 function revealComment(event){
   const targetArticle = event.target.closest('.post-temp');
@@ -36,12 +40,10 @@ const switchPages = () => {
     location.replace(newUrl + '/index.html');
   }
 };
-
-
 // Seems like when you login, the token is unique and persists
 // throughout the rest of the items that require authentication
 
-const createProfile = (event) => {
+const editProfile = (event) => {
   event.preventDefault();
   const backupEmail = event.target[0].value;
   const mobile = event.target[1].value;
@@ -68,7 +70,7 @@ const createProfile = (event) => {
 };
 
 const updateProfile = () => {
-  const userProfile = JSON.parse(localStorage.userProfile)
+  const userProfile = JSON.parse(localStorage.userProfile);
   // console.log(userProfile);
   if(userToken){
     document.querySelector('#innerUser').innerText =
