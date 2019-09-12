@@ -14,7 +14,7 @@ const logInForm = document.querySelector('.logInForm');
 
 const userToken = localStorage.loginToken;
 const addUserProfile = () => {
-  document.querySelector('#innerUser').innerText = loacalStorage.userName;
+  document.querySelector('#innerUser').innerText = localStorage.userName;
 };
 
 addUserProfile();

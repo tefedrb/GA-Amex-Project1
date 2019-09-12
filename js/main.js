@@ -53,8 +53,6 @@ const signUp = (email, pass, user) => {
   })
 };
 
-
-
 const newUser = (event) => {
   event.preventDefault();
   console.log('new user event', event);
@@ -84,6 +82,7 @@ const logIn = (email, pass) => {
     console.log('Login', response);
     loginToken = response.token;
     localStorage.loginToken = loginToken;
+    switchPages()
   })
   .catch(error => {
     console.log(error);
