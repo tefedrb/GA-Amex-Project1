@@ -25,9 +25,32 @@
         </div>
       </div>
     </header>
-    <section id="update-profile-fly-out">
-      <div>
-
+    <section class="create-profile">
+      <div id="profileWrapper">
+        <div class="profileInfo" id="username">
+          USERNAME:
+          <span id="innerUser">SomeUserName</span>
+        </div>
+        <div id="userProfile">
+          <span class="profileInfo">
+            BACKUP EMAIL:
+            <span id="backUpEmail">someemail@gmail.com</span>
+          </span>
+          <span class="profileInfo">
+            MOBILE:
+            <span id="mobile">222.333.4444</span>
+          </span>
+          <span class="profileInfo">
+            ADDRESS:
+            <span id="address">10 penny lane</span>
+          </span>
+        </div>
+        <form class="profile-form" onSubmit="createProfile(event)">
+          <input id="create-backup-email" type="text" placeholder="backup email"/>
+          <input id="create-mobile" type="text" placeholder="mobile"/>
+          <input id="create-address" type="text" placeholder="address"/>
+          <input class="sub" type="submit" value="SAVE PROFILE">
+        </form>
       </div>
     </section>
     <section class="create-profile">

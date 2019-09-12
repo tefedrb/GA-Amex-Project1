@@ -21,25 +21,8 @@ const switchPages = () => {
   }
 };
 
-const updateProfile = () => {
-  const userProfile = JSON.parse(localStorage.userProfile)
-  // console.log(userProfile);
-  if(loginToken){
-    document.querySelector('#innerUser').innerText =
-    userProfile.user.username;
-    document.querySelector('#backUpEmail').innerText =
-    userProfile.additionalEmail;
-    document.querySelector('#mobile').innerText =
-    userProfile.mobile;
-    document.querySelector('#address').innerText =
-    userProfile.address;
-  }
-};
-
 let loginToken = localStorage.loginToken;
 let signUpToken = localStorage.signUpToken;
-updateProfile();
-
 
 const signUp = (email, pass, user) => {
   fetch('http://thesi.generalassemb.ly:8080/signup', {
@@ -106,127 +89,6 @@ const captureLogin = (event) => {
   const pass = event.target[0].value;
   logIn(email, pass);
 };
-
-const createProfile = (event) => {
-  event.preventDefault();
-  const backupEmail = event.target[0].value;
-  const mobile = event.target[1].value;
-  const address = event.target[2].value;
-  fetch('http://thesi.generalassemb.ly:8080/profile', {
-    method: 'POST',
-    headers: {
-      "Authorization": "Bearer " + signUpToken,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      additionalEmail: backupEmail,
-      mobile: mobile,
-      address: address
-    })
-  })
-  .then(response => response.json())
-  .then(response => {
-    console.log('Create Profile', response);
-    localStorage.userProfile = JSON.stringify(response);
-    updateProfile();
-  })
-  .catch(error => {
-    console.log(error);
-  })
-};
-
-const getProfile = () => {
-  fetch('http://thesi.generalassemb.ly:8080/profile', {
-    method: 'GET',
-    headers: {
-      "Authorization": "Bearer " + loginToken,
-      "Content-Type": "application/json"
-    },
-  })
-  .then(response => response.json())
-  .then(response => {
-    console.log('Get Profile', response);
-  })
-  .catch(error => {
-    console.log(error);
-  })
-};
-
-const createPost = (title, description) => {
-  fetch('http://thesi.generalassemb.ly:8080/post/3/comment', {
-    method: 'POST',
-    headers: {
-      "Authorization": "Bearer " + userToken,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      title: title,
-      description: description
-    })
-  })
-  .then(response => response.json())
-  .then(response => {
-    console.log('Create Post', response);
-    localStorage.userProfile = response;
-  })
-  .catch(error => {
-    console.log(error);
-  })
-};
-
-const listAllPosts = () => {
-  fetch('http://thesi.generalassemb.ly:8080/post/list', {
-    method: 'GET',
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      additionalEmail: additionalEmail,
-      mobile: mobile,
-      address: address
-    })
-  })
-  .then(response => response.json())
-  .then(response => {
-    console.log('List All Posts', response);
-  })
-  .catch(error => {
-    console.log(error);
-  })
-};
-
-const deleteComment = () => {
-  fetch('http://thesi.generalassemb.ly:8080/post/list', {
-    method: 'DELETE',
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      additionalEmail: additionalEmail,
-      mobile: mobile,
-      address: address
-    })
-  })
-  .then(response => response.json())
-  .then(response => {
-    console.log('List All Posts', response);
-  })
-  .catch(error => {
-    console.log(error);
-  })
-};
-
-const userPage = () => {
-
-};
-
-settings.addEventListener('click', function(e){
-  if(dropDownMenu.classList.contains('create-profile-slide')){
-    dropDownMenu.classList.remove('create-profile-slide');
-  } else {
-    dropDownMenu.classList.add('create-profile-slide');
-  }
-});
 
 setUserForm.addEventListener('mouseover', function(e){
     if(e.target === signUpBtn){
