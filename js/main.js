@@ -21,7 +21,20 @@ const switchPages = () => {
   }
 };
 
-let userToken = null;
+let loginToken = localStorage.loginToken;
+let signUpToken = localStorage.signUpToken;
+
+const assesUser = () => {
+  if(loginToken){
+    document.querySelector('#backUpEmail').innerText =
+    localStorage.userProfile.additionalEmail;
+    document.querySelector('#mobile').innerText =
+    localStorage.userProfile.mobile;
+    document.querySelector('#address').innerText =
+    localStorage.userProfile.address
+  }
+}
+
 
 const signUp = (email, pass, user) => {
   fetch('http://thesi.generalassemb.ly:8080/signup', {
@@ -38,7 +51,8 @@ const signUp = (email, pass, user) => {
   .then(response => response.json())
   .then(response => {
     console.log('Sign Up', response);
-    userToken = response.token;
+    signUpToken = response.token;
+    localStorage.signUpToken = signUpToken;
     logIn(email, pass);
   })
   .catch(error => {
@@ -62,7 +76,7 @@ const logIn = (email, pass) => {
   fetch('http://thesi.generalassemb.ly:8080/login', {
     method: 'POST',
     headers: {
-      "Authorization": "Bearer " + userToken,
+      "Authorization": "Bearer " + signUpToken,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -73,8 +87,8 @@ const logIn = (email, pass) => {
   .then(response => response.json())
   .then(response => {
     console.log('Login', response);
-    userToken = response.token;
-    localStorage.token = userToken;
+    loginToken = response.token;
+    localStorage.loginToken = loginToken;
   })
   .catch(error => {
     console.log(error);
@@ -96,7 +110,7 @@ const createProfile = (event) => {
   fetch('http://thesi.generalassemb.ly:8080/profile', {
     method: 'POST',
     headers: {
-      "Authorization": "Bearer " + userToken,
+      "Authorization": "Bearer " + signUpToken,
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
@@ -108,7 +122,24 @@ const createProfile = (event) => {
   .then(response => response.json())
   .then(response => {
     console.log('Create Profile', response);
-    localStorage.profile = response;
+    localStorage.userProfile = response;
+  })
+  .catch(error => {
+    console.log(error);
+  })
+};
+
+const getProfile = () => {
+  fetch('http://thesi.generalassemb.ly:8080/profile', {
+    method: 'GET',
+    headers: {
+      "Authorization": "Bearer " + loginToken,
+      "Content-Type": "application/json"
+    },
+  })
+  .then(response => response.json())
+  .then(response => {
+    console.log('Get Profile', response);
   })
   .catch(error => {
     console.log(error);
@@ -130,6 +161,7 @@ const createPost = (title, description) => {
   .then(response => response.json())
   .then(response => {
     console.log('Create Post', response);
+    localStorage.userProfile = response;
   })
   .catch(error => {
     console.log(error);

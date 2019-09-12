@@ -166,9 +166,45 @@ input {
   transform: translateY(0);
 }
 
-.profile-form {
-  transform: translateY(-425%);
+#profileWrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  bottom: 6em;
+  width: 600px;
 }
+
+#userProfile {
+  display: flex;
+  justify-content: space-around;
+  height: 75px;
+}
+
+.profileInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: 800;
+  color: #daf250;
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.profileInfo span {
+  color: #fff;
+  font-size: 0.8em;
+}
+
+#username {
+  align-self: center;
+  margin-bottom: 3em;
+  font-size: 1.5em;
+}
+
+.profile-form {
+  align-self: center;
+}
+
 
 #update-profile-fly-out {
 
