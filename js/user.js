@@ -12,27 +12,16 @@ const signUpBtn = document.querySelector('.signUpBtn');
 const signUpForm = document.querySelector('.signUpForm');
 const logInForm = document.querySelector('.logInForm');
 
-function revealComment(){
-  const commentBtn = document.querySelector('.cmntBtn');
-  if (commentBtn.style.display === "none") {
-    commentBtn.style.display = "block";
-  } else {
-    commentBtn.style.display = "none";
-  }
-}
+const userToken = localStorage.loginToken;
 
-const updateProfile = () => {
-  const userProfile = JSON.parse(localStorage.userProfile)
-  // console.log(userProfile);
-  if(loginToken){
-    document.querySelector('#innerUser').innerText =
-    userProfile.user.username;
-    document.querySelector('#backUpEmail').innerText =
-    userProfile.additionalEmail;
-    document.querySelector('#mobile').innerText =
-    userProfile.mobile;
-    document.querySelector('#address').innerText =
-    userProfile.address;
+
+function revealComment(event){
+  const targetArticle = event.target.closest('.post-temp');
+  const commentBox = targetArticle.querySelector('.commentBox');
+  if (commentBox.style.display === "none") {
+    commentBox.style.display = "block";
+  } else {
+    commentBox.style.display = "none";
   }
 };
 
@@ -48,63 +37,9 @@ const switchPages = () => {
   }
 };
 
-const newUser = (email, pass, user) => {
-  fetch('http://thesi.generalassemb.ly:8080/signup', {
-    method: 'POST',
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: email,
-      password: pass,
-      username: user
-    })
-  })
-  .then(response => response.json())
-  .then(response => {
-    console.log('Sign Up', response);
-    userToken = response.token;
-    existingUser(email, pass);
-  })
-  .catch(error => {
-    console.log(error);
-  })
-};
-
-const signUp = (event) => {
-  event.preventDefault();
-  console.log(event);
-  const emailIn = event.target[0].value;
-  const passIn = event.target[1].value;
-  const userIn = event.target[2].value;
-  emailIn.includes('@') ? newUser(emailIn, passIn, userIn) :
-  alert("You need to enter a valid email address");
-};
 
 // Seems like when you login, the token is unique and persists
 // throughout the rest of the items that require authentication
-const existingUser = (email, pass) => {
-  fetch('http://thesi.generalassemb.ly:8080/login', {
-    method: 'POST',
-    headers: {
-      "Authorization": "Bearer " + userToken,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: email,
-      password: pass
-    })
-  })
-  .then(response => response.json())
-  .then(response => {
-    console.log('Login', response);
-    userToken = response.token;
-    localStorage.token = userToken;
-  })
-  .catch(error => {
-    console.log(error);
-  })
-};
 
 const createProfile = (event) => {
   event.preventDefault();
@@ -132,54 +67,47 @@ const createProfile = (event) => {
   })
 };
 
-function updateDom(){
-  document.querySelector('.postForm').style.display = "block";
-  fetch("http://thesi.generalassemb.ly:8080/user/post", {
-      headers: {
-          "Authorization": "Bearer " + localStorage.getItem('user')
-      }
-  })
-  .then((response) => {
-      return response.json();
-  })
-  .then((response) => {
-      const container = document.querySelector('.postTemp');
+const updateProfile = () => {
+  const userProfile = JSON.parse(localStorage.userProfile)
+  // console.log(userProfile);
+  if(userToken){
+    document.querySelector('#innerUser').innerText =
+    userProfile.user.username;
+    document.querySelector('#backUpEmail').innerText =
+    userProfile.additionalEmail;
+    document.querySelector('#mobile').innerText =
+    userProfile.mobile;
+    document.querySelector('#address').innerText =
+    userProfile.address;
+  }
+};
 
-      for (let i = 0; i < response.length; i++) {
-          const divPost = document.querySelector('package-post');
-          const userNameMsg = document.querySelector('.messageUserName');
-          const postTitle = document.querySelector('.titleMsg')
-          const message = document.querySelector('.message');
-          postTitle.innerText = response[i].title;
-          message.innerText = res[i].description;
-          postTemp.appendChild(divPost);
-      }
-  })
-  .catch((err) => {
-      console.log(err);
-  })
+function domComments(){
+  document.querySelector('.postForm').style.display = "block";
+  const parentNode = document.querySelector('.containerLanding');
+  const postTemp = document.querySelector('.post-temp');
+  const newTemp = postTemp.cloneNode(true);
+  parentNode.appendChild(newTemp);
 };
 
 const createPost = (event) => {
   event.preventDefault();
-  const title = document.querySelector('.title');
-  const description = document.querySelector('.description');
-  const pstCommentBtn = document.querySelector('.postComment');
-
-  fetch('http://thesi.generalassemb.ly:8080/post/3/comment', {
+  const title = event.target.children[0].value;
+  const description = event.target.children[1].value;
+  fetch('http://thesi.generalassemb.ly:8080/post', {
     method: 'POST',
     headers: {
       "Authorization": "Bearer " + userToken,
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      title: title.value,
-      description: description.value
+      title: title,
+      description: description
     })
   })
-  .then((res) => {
+  .then(res => {
       console.log(res);
-      updateDom(res);
+      domComments();
   })
   .catch((err) => {
       console.log(err);
@@ -214,6 +142,3 @@ settings.addEventListener('click', function(e){
     dropDownMenu.classList.add('create-profile-slide');
   }
 });
-
-}
-
