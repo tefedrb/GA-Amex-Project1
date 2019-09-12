@@ -21,19 +21,24 @@ const switchPages = () => {
   }
 };
 
+const updateProfile = () => {
+  const userProfile = JSON.parse(localStorage.userProfile)
+  // console.log(userProfile);
+  if(loginToken){
+    document.querySelector('#innerUser').innerText =
+    userProfile.user.username;
+    document.querySelector('#backUpEmail').innerText =
+    userProfile.additionalEmail;
+    document.querySelector('#mobile').innerText =
+    userProfile.mobile;
+    document.querySelector('#address').innerText =
+    userProfile.address;
+  }
+};
+
 let loginToken = localStorage.loginToken;
 let signUpToken = localStorage.signUpToken;
-
-const assesUser = () => {
-  if(loginToken){
-    document.querySelector('#backUpEmail').innerText =
-    localStorage.userProfile.additionalEmail;
-    document.querySelector('#mobile').innerText =
-    localStorage.userProfile.mobile;
-    document.querySelector('#address').innerText =
-    localStorage.userProfile.address
-  }
-}
+updateProfile();
 
 
 const signUp = (email, pass, user) => {
@@ -62,7 +67,7 @@ const signUp = (email, pass, user) => {
 
 const newUser = (event) => {
   event.preventDefault();
-  console.log(event);
+  console.log('new user event', event);
   const emailIn = event.target[0].value;
   const passIn = event.target[1].value;
   const userIn = event.target[2].value;
@@ -122,7 +127,8 @@ const createProfile = (event) => {
   .then(response => response.json())
   .then(response => {
     console.log('Create Profile', response);
-    localStorage.userProfile = response;
+    localStorage.userProfile = JSON.stringify(response);
+    updateProfile();
   })
   .catch(error => {
     console.log(error);
