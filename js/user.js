@@ -62,7 +62,9 @@ const editProfile = (event) => {
   })
   .then(response => response.json())
   .then(response => {
-    console.log('Create Profile', response);
+    localStorage.userProfile = JSON.stringify(response);
+    console.log('edited Profile', response);
+    updateProfile();
   })
   .catch(error => {
     console.log(error);
