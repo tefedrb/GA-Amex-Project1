@@ -148,12 +148,11 @@ function updateDom(){
 
       for (let i = 0; i < response.length; i++) {
           const userNameMsg = document.querySelector('.messageUserName');
+          const postTitle = document.querySelector('.titleMsg')
           const message = document.querySelector('.message');
-          item.appendChild(title);
-          item.appendChild(description);
-          title.innerText = res[i].title;
-          description.innerText = res[i].description;
-          list.appendChild(item);
+          postTitle.innerText = response[i].title;
+          message.innerText = res[i].description;
+          container.appendChild(item);
       }
   })
   .catch((err) => {
