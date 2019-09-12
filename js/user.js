@@ -1,3 +1,4 @@
+
 // comment icon to hide and reveal upon click within post
 const userNameDOM = document.querySelector('#user');
 const classIn = document.querySelector('.email');
@@ -131,7 +132,6 @@ const createProfile = (event) => {
   })
 };
 
-
 function updateDom(){
   document.querySelector('.postForm').style.display = "block";
   fetch("http://thesi.generalassemb.ly:8080/user/post", {
@@ -143,16 +143,16 @@ function updateDom(){
       return response.json();
   })
   .then((response) => {
-      const container = document.querySelector('.content');
+      const container = document.querySelector('.postTemp');
 
       for (let i = 0; i < response.length; i++) {
+          const divPost = document.querySelector('package-post');
           const userNameMsg = document.querySelector('.messageUserName');
+          const postTitle = document.querySelector('.titleMsg')
           const message = document.querySelector('.message');
-          item.appendChild(title);
-          item.appendChild(description);
-          title.innerText = res[i].title;
-          description.innerText = res[i].description;
-          list.appendChild(item);
+          postTitle.innerText = response[i].title;
+          message.innerText = res[i].description;
+          postTemp.appendChild(divPost);
       }
   })
   .catch((err) => {
@@ -214,3 +214,6 @@ settings.addEventListener('click', function(e){
     dropDownMenu.classList.add('create-profile-slide');
   }
 });
+
+}
+
