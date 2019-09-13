@@ -11,6 +11,7 @@ const logInBtn = document.querySelector('.logInBtn');
 const signUpBtn = document.querySelector('.signUpBtn');
 const signUpForm = document.querySelector('.signUpForm');
 const logInForm = document.querySelector('.logInForm');
+const homeBtn = document.querySelector('.logo-wrap a');
 
 const userToken = localStorage.loginToken;
 const addUserProfile = () => {
@@ -18,6 +19,26 @@ const addUserProfile = () => {
 };
 
 addUserProfile();
+
+const checkLogin = (page) => {
+  const userHeader = document.querySelector('.userHeader');
+  const signUpLogin = document.querySelector('.signUpLogIn');
+  if(localStorage.loginToken){
+    if(page === 'index'){
+      signUpLogin.style.display = 'none';
+    }
+    userHeader.style.display = 'flex';
+    userHeader.children[1].innerText =
+    localStorage.userName;
+  } else if(page === 'index'){
+    userHeader.style.display = 'none';
+    signUpLogin.style.display = 'flex';
+  }
+};
+
+checkLogin();
+
+
 
 function showCommentInput(event){
   const targetArticle = event.target.closest('.post-temp');
@@ -197,3 +218,7 @@ settings.addEventListener('click', function(e){
     dropDownMenu.classList.add('create-profile-slide');
   }
 });
+
+homeBtn.addEventListener('click', function(e){
+  switchPages();
+})

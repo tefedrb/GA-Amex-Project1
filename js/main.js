@@ -10,6 +10,10 @@ const signUpBtn = document.querySelector('.signUpBtn');
 const signUpForm = document.querySelector('.signUpForm');
 const logInForm = document.querySelector('.logInForm');
 
+let loginToken = localStorage.loginToken;
+let signUpToken = localStorage.signUpToken;
+
+
 const switchPages = () => {
   const urlArry = window.location.href.split('/');
   const newUrl = urlArry.slice(0,urlArry.length-1)
@@ -20,9 +24,6 @@ const switchPages = () => {
     location.replace(newUrl + '/index.html');
   }
 };
-
-let loginToken = localStorage.loginToken;
-let signUpToken = localStorage.signUpToken;
 
 const saveUserName = (user) => {
   localStorage.userName = user

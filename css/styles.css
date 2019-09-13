@@ -21,24 +21,6 @@ header {
   position: fixed;
 }
 
-.settings-icon{
-  /* !important is temporary */
-  display: none;
-  position: absolute;
-  top: .7em;
-  /* right: 2em; */
-  right: 22em;
-  cursor: pointer;
-  color: #daf250;
-  opacity: .6;
-  transition: all .5s ease;
-  font-size: 2.1em;
-}
-
-.settings-icon:hover {
-  opacity: 1;
-}
-
 .header-wrap {
   display: flex;
   align-items: center;
@@ -71,8 +53,31 @@ h2.sub-logo {
   font-size: .8em;
 }
 
-.user-pic {
-  margin-right: 100px;
+.userHeader {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  width: 8em;
+  height: 100%;
+}
+
+.userHeader img {
+  width: 20%;
+  border-radius: 20px;
+}
+
+.settings-icon{
+  display: none;
+  right: 22em;
+  cursor: pointer;
+  color: #daf250;
+  opacity: 1;
+  transition: all .2s ease;
+  font-size: 1.3em;
+}
+
+.settings-icon:hover {
+  color: #69d2ff;
 }
 
 .igloo {
@@ -216,7 +221,7 @@ input {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding-top: 100px;
+  padding-top: 8em;
 }
 
 article {
