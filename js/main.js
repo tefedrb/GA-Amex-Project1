@@ -48,7 +48,6 @@ const signUp = (email, pass, user) => {
   })
   .then(response => response.json())
   .then(response => {
-    console.log('Sign Up', response);
     signUpToken = response.token;
     localStorage.signUpToken = signUpToken;
     logIn(email, pass);
@@ -60,7 +59,6 @@ const signUp = (email, pass, user) => {
 
 const newUser = (event) => {
   event.preventDefault();
-  console.log('new user event', event);
   const emailIn = event.target[0].value;
   const passIn = event.target[1].value;
   const userIn = event.target[2].value;
@@ -85,15 +83,13 @@ const logIn = (email, pass) => {
   })
   .then(response => response.json())
   .then(response => {
-    console.log('Login', response);
     loginToken = response.token;
     localStorage.loginToken = loginToken;
     if(localStorage.signUpToken){
-      console.log('eh?')
       addToMasterObj(email, pass, localStorage.userName, signUpToken, loginToken);
       localStorage.removeItem('signUpToken');
     }
-    switchPages()
+    switchPages();
   })
   .catch(error => {
     console.log(error);
@@ -112,7 +108,6 @@ const captureLogin = (event) => {
   } else {
     alert('Sorry, wrong password/email');
   }
-  // Need to add a check here of our loginToken obj
 };
 
 const addToMasterObj = (email, pass, user, loginTok, signUpTok) => {

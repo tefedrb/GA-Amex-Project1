@@ -1,5 +1,3 @@
-
-// comment icon to hide and reveal upon click within post
 const userNameDOM = document.querySelector('#user');
 const classIn = document.querySelector('.email');
 const passwordIn = document.querySelector('.password');
@@ -17,7 +15,6 @@ const userToken = localStorage.loginToken;
 const addUserProfile = () => {
   document.querySelector('#innerUser').innerText = localStorage.userName;
   const masterObj = JSON.parse(localStorage.masterObj);
-  console.log(masterObj);
   if(masterObj[localStorage.email].moreinfo){
     updateProfile(JSON.parse(masterObj[localStorage.email].moreinfo));
   }
@@ -40,8 +37,10 @@ const logOut = (event) => {
 };
 
 checkLogin();
+// This adds userProfile from masterObj
 addUserProfile();
-callAllPosts(collectAllTokens())
+// Display all posts using masterObj
+callAllPosts(collectAllTokens());
 
 function showCommentInput(event){
   const targetArticle = event.target.closest('.post-temp');
@@ -58,7 +57,6 @@ function addCommentToDom(user, element){
   const commentsArea = element.closest('.commentsArea');
   const commentHTML = document.querySelector('.postedComment');
   const copyComment = commentHTML.cloneNode(true);
-  console.log(commentHTML, copyComment)
   commentsArea.appendChild(copyComment);
   copyComment.children[0].innerText = user;
   copyComment.children[1].children[0].innerText = inputText;
@@ -128,16 +126,15 @@ function addPostToDom(title, description, username){
   newTemp.querySelector('.titleMsg').innerText = title;
   newTemp.querySelector('.message').innerText = description;
   newTemp.querySelector('.messageUserName').innerText = `Posted by ${username}`;
-  parentNode.appendChild(newTemp);
   newTemp.style.display = 'block';
+  parentNode.appendChild(newTemp);
 };
 
 const createPost = (event) => {
   event.preventDefault();
   const title = event.target.children[0].value;
   const description = event.target.children[1].value;
-  addPostToDom(title, description);
-  console.log(typeof title, typeof description, 'TITLE AND DESCRIPTION')
+  addPostToDom(title, description, localStorage.userName);
   fetch('http://thesi.generalassemb.ly:8080/post', {
     method: 'POST',
     headers: {
@@ -158,10 +155,6 @@ const createPost = (event) => {
   .catch((err) => {
     console.log(err);
   })
-};
-
-const getCommentsById = () => {
-
 };
 
 const listAllPosts = () => {
@@ -185,9 +178,7 @@ const listAllPosts = () => {
 
 const newComment = (event) => {
   event.preventDefault();
-  console.log(event);
   const thisComment = event.target.querySelector('.commentInput');
-  console.log(thisComment);
   fetch('http://thesi.generalassemb.ly:8080/comment/3', {
     method: 'POST',
     headers: {
@@ -222,10 +213,10 @@ const getCommentsByUser = () => {
     return res.json();
   })
   .then(res => {
-    console.log(res)
+    console.log(res);
   })
   .catch(err => {
-    console.log(err)
+    console.log(err);
   })
 };
 
@@ -257,7 +248,6 @@ function collectAllTokens(){
   return allTokens;
 };
 
-callAllPosts(collectAllTokens())
 
 function callAllPosts(arr){
   arr.forEach(i => {
@@ -266,7 +256,7 @@ function callAllPosts(arr){
 };
 
 function postAllPosts(arr){
-  arr.forEach( i => {
+  arr.forEach(i => {
     addPostToDom(i.title, i.description, i.user.username);
   });
 };
@@ -283,7 +273,7 @@ function getPostsByUser(token){
     return res.json();
   })
   .then(res => {
-    console.log(res)
+    console.log(res);
     postAllPosts(res);
   })
   .catch(err => {
@@ -303,11 +293,11 @@ function getProfile(func){
     return res.json();
   })
   .then(res => {
-    console.log(res)
+    console.log(res);
     if(func) func(res);
   })
   .catch(err => {
-    console.log(err)
+    console.log(err);
   })
 };
 
