@@ -19,14 +19,18 @@ const addUserProfile = () => {
 
 addUserProfile();
 
-function revealComment(event){
+function showCommentInput(event){
   const targetArticle = event.target.closest('.post-temp');
-  const commentBox = targetArticle.querySelector('.commentBox');
-  if (commentBox.style.display === "none") {
-    commentBox.style.display = "block";
+  const inputWrap = targetArticle.querySelector('.inputWrap');
+  if (inputWrap.style.display === "none") {
+    inputWrap.style.display = "flex";
   } else {
-    commentBox.style.display = "none";
+    inputWrap.style.display = "none";
   }
+};
+
+function addComment(){
+
 };
 
 // updateProfile();
@@ -118,10 +122,13 @@ const createPost = (event) => {
     })
   })
   .then(res => {
-      console.log(res);
+    return res.json();
+  })
+  .then(res => {
+    console.log(res);
   })
   .catch((err) => {
-      console.log(err);
+    console.log(err);
   })
 };
 

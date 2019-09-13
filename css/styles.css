@@ -95,15 +95,6 @@ button {
   height: 30px;
 }
 
-button.newPost, button.newComment {
-  position: relative;
-  background-color: #FFFFFF;
-  border: 3px solid #69d2ff;
-  width: 80PX;
-  height: 30px;
-  cursor: pointer;
-}
-
 input {
   transition: all .5s ease-in-out;
 }
@@ -208,18 +199,6 @@ input {
 }
 
 
-#update-profile-fly-out {
-
-}
-
-#create-backup-email {
-
-}
-
-#create-address {
-
-}
-
 .createPost {
   margin-top: 5em;
   margin-bottom: 3em;
@@ -247,11 +226,13 @@ article {
   box-shadow: 10px 10px 30px grey;
   margin: 20px;
 }
-article.post-temp {
+
+.top-bar {
   width: 700px;
-  margin: 1.5em;
-  box-shadow: 10px 10px 30px grey;
-  margin: 20px;
+  height: 40px;
+  background-color:#edfcff;
+  display: flex;
+  align-items: center;
 }
 
 .content {
@@ -273,13 +254,6 @@ a.comment {
   cursor: pointer;
 }
 
-.top-bar {
-  width: 700px;
-  height: 40px;
-  background-color:#edfcff;
-  display: flex;
-  align-items: center;
-}
 
 .user-icon {
   width: 30px;
@@ -301,15 +275,12 @@ a.comment {
   background-color: pink;
   margin-left: 20px;
 }
+
 .user-icon4 {
   width: 30px;
   height: 30px;
   background-color: orange;
   margin-left: 20px;
-}
-
-.active {
-  margin: 1.5em auto;
 }
 
 h3 {
@@ -318,45 +289,6 @@ h3 {
 }
 
 /* ________post styles___________ */
-.container-post {
-  width: 700px;
-  height: 100%;
-  margin: 1.5em;
-  margin: 20px;
-}
-.sub-post {
-  width: 630px;
-  background-color: #f7f7f7;
-  margin-bottom: 20px;
-}
-h2.sub-username {
-  font-weight: 900;
-  font-size: 1.1em;
-  background-color: #edfcff;
-}
-h3.sub-titleMsg {
-  font-weight:900;
-  font-size: .8em;
-  margin-bottom: 8px;
-}
-p.sub-message {
-  font-size: .8em;
-  padding-left:10px;
-}
-
-.sub-active-icons {
-    background-color: #f2f2f2;
-    width: auto;
-}
-a.sub-comment {
-  font-size: 1.2em;
-  color: #69d2ff;
-  font-weight: 600;
-  margin-top: 30px;
-  padding-right: 20px;
-  cursor: pointer;
-}
-
 
 input[class=title]{
   width: 689px;
@@ -364,26 +296,6 @@ input[class=title]{
   height: 30px;
   border: 1.8px solid #daf250;
   font-size: 1em;
-}
-
-textarea.description {
-  width: 700px;
-  height: 100px;
-  resize: none;
-  margin-top: 10px;
-  font-size: 1em;
-  border: 1.8px solid #daf250;
-  overflow-y: scroll;
-}
-
-textarea.commentArea {
-  width: 600px;
-  height: 100px;
-  resize: none;
-  margin-top: 10px;
-  font-size: .8em;
-  border: 3px solid #69d2ff;
-  overflow-y: scroll;
 }
 
 footer {

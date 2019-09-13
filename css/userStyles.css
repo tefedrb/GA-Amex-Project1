@@ -1,3 +1,17 @@
+.container-post {
+  width: 700px;
+  height: 100%;
+  margin: 1.5em;
+  margin: 20px;
+}
+
+article.post-temp {
+  width: 700px;
+  margin: 1.5em;
+  box-shadow: 10px 10px 30px grey;
+  margin: 20px;
+}
+
 button.newPost, button.newComment {
   position: relative;
   background-color: #FFFFFF;
@@ -7,11 +21,8 @@ button.newPost, button.newComment {
   cursor: pointer;
 }
 
-article.post-temp {
-  width: 700px;
-  margin: 1.5em;
-  box-shadow: 10px 10px 30px grey;
-  margin: 20px;
+.commentsArea {
+  padding: 0 1em;
 }
 
 .active {
@@ -28,51 +39,47 @@ textarea.description {
   overflow-y: scroll;
 }
 
-textarea.commentArea {
+textarea.commentInput {
   width: 600px;
   height: 100px;
   resize: none;
-  margin-top: 10px;
+  margin-top: .5em;
+  margin-bottom: .2em;
   font-size: .8em;
   border: 3px solid #69d2ff;
   overflow-y: scroll;
 }
 
-.container-post {
-  width: 700px;
-  height: 100%;
-  margin: 1.5em;
-  margin: 20px;
-}
-
-.sub-post {
+.postedComment {
   width: 630px;
   background-color: #f7f7f7;
   margin-bottom: 20px;
 }
 
-.sub-post h2 {
+.inputWrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.postedComment h2 {
   font-weight: 900;
   font-size: 1.1em;
+  padding-left: 10px;
   background-color: #edfcff;
 }
 
-.sub-post h3 {
-  font-weight:900;
+.postedComment p {
   font-size: .8em;
-  margin-bottom: 8px;
-}
-
-.sub-post p {
-  font-size: .8em;
-  padding-left:10px;
+  padding-left: 10px;
 }
 
 .sub-active-icons {
-    background-color: #f2f2f2;
-    width: auto;
+  background-color: #f2f2f2;
+  width: auto;
 }
-a.sub-comment {
+
+span.sub-comment {
+  margin-left: 96%;
   font-size: 1.2em;
   color: #69d2ff;
   font-weight: 600;
