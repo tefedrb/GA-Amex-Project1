@@ -29,14 +29,16 @@ function showCommentInput(event){
   }
 };
 
-function addComment(user, element){
-  const commentsArea = document.querySelector('.commentsArea');
-  const inputText = element.querySelector('.commentInput').value;
-  const commentHTML = document.querySelector('.postedComent');
+function addCommentToDom(user, element){
+  const inputText = element.value;
+  const commentsArea = element.closest('.commentsArea');
+  const commentHTML = document.querySelector('.postedComment');
   const copyComment = commentHTML.cloneNode(true);
-  copyComment.children[0].innerText = user;
-  copyComment.children[1].firstChild.innerText = inputText;
+  console.log(commentHTML, copyComment)
   commentsArea.appendChild(copyComment);
+  copyComment.children[0].innerText = user;
+  copyComment.children[1].children[0].innerText = inputText;
+  copyComment.style.display = "block";
 };
 
 // updateProfile();
@@ -96,7 +98,7 @@ const updateProfile = () => {
   }
 };
 
-function domComments(title, description){
+function addPostToDom(title, description){
   document.querySelector('.postForm').style.display = "block";
   console.log(event, 'alksdjflkasjflk')
 
@@ -108,13 +110,14 @@ function domComments(title, description){
   newTemp.querySelector('.titleMsg').innerText = title;
   newTemp.querySelector('.message').innerText = description;
   parentNode.appendChild(newTemp);
+  newTemp.style.display = 'block';
 };
 
 const createPost = (event) => {
   event.preventDefault();
   const title = event.target.children[0].value;
   const description = event.target.children[1].value;
-  domComments(title, description);
+  addPostToDom(title, description);
   console.log(typeof title, typeof description, 'TITLE AND DESCRIPTION')
   fetch('http://thesi.generalassemb.ly:8080/post', {
     method: 'POST',
@@ -137,6 +140,34 @@ const createPost = (event) => {
     console.log(err);
   })
 };
+
+const newComment = (event) => {
+  event.preventDefault();
+  console.log(event);
+  const thisComment = event.target.querySelector('.commentInput');
+  console.log(thisComment);
+  fetch('http://thesi.generalassemb.ly:8080/comment/3', {
+    method: 'POST',
+    headers: {
+      "Authorization": "Bearer " + userToken,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      text: thisComment.value
+    })
+  })
+  .then(res => {
+    return res.json();
+  })
+  .then(res => {
+    console.log(res);
+    addCommentToDom(localStorage.userName, thisComment);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
+
 
 const deleteComment = () => {
   fetch('http://thesi.generalassemb.ly:8080/post/list', {

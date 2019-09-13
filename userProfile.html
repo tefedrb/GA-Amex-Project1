@@ -98,12 +98,14 @@
                 <i class="fas fa-trash"></i>
               </a>
               <div class="inputWrap" style="display: none;" >
-                <textarea class="commentInput" placeholder="LEAVE A COMMENT..."></textarea>
-                <button class="newComment" type="submit">POST</button>
+                <form onSubmit="newComment(event)">
+                  <textarea class="commentInput" placeholder="LEAVE A COMMENT..."></textarea>
+                  <button class="newComment" type="submit">POST</button>
+                </form>
               </div>
             </div>
 
-            <div class="postedComment">
+            <div class="postedComment" style="display: none;">
               <h2 class="sub-username">George</h2>
               <div class="sub-active-icons">
                 <p class="sub-message">Some Message</p>

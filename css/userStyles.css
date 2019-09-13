@@ -6,6 +6,7 @@
 }
 
 article.post-temp {
+  display: none;
   width: 700px;
   margin: 1.5em;
   box-shadow: 10px 10px 30px grey;
@@ -19,6 +20,11 @@ button.newPost, button.newComment {
   width: 80PX;
   height: 30px;
   cursor: pointer;
+}
+
+h3.titleMsg {
+  font-size: 1.8em;
+  margin: 0;
 }
 
 .commentsArea {
