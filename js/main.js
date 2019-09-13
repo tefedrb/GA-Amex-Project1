@@ -13,6 +13,7 @@ const logInForm = document.querySelector('.logInForm');
 let loginToken = localStorage.loginToken;
 let signUpToken = localStorage.signUpToken;
 
+
 // const checkLogin = (page) => {
 //   const userHeader = document.querySelector('.userHeader');
 //   const signUpLogin = document.querySelector('.signUpLogIn');
@@ -41,7 +42,11 @@ const switchPages = () => {
 };
 
 const saveUserName = (user) => {
-  localStorage.userName = user
+  localStorage.userName = user;
+};
+
+const saveEmail = (email) => {
+  localStorage.email = email;
 };
 
 const signUp = (email, pass, user) => {
@@ -82,6 +87,7 @@ const newUser = (event) => {
 // Seems like when you login, the token is unique and persists
 // throughout the rest of the items that require authentication
 const logIn = (email, pass) => {
+  saveEmail(email);
   fetch('http://thesi.generalassemb.ly:8080/login', {
     method: 'POST',
     headers: {
@@ -99,29 +105,14 @@ const logIn = (email, pass) => {
     loginToken = response.token;
     localStorage.loginToken = loginToken;
     if(localStorage.signUpToken){
+      console.log('eh?')
       addToMasterObj(email, pass, localStorage.userName, signUpToken, loginToken);
-      localStorage.removeItem(signUpToken);
+      localStorage.removeItem('signUpToken');
     }
     switchPages()
   })
   .catch(error => {
     console.log(error);
-  })
-};
-
-const getProfile = () => {
-  fetch('http://thesi.generalassemb.ly:8080/profile', {
-    method: 'GET',
-    headers: {
-      "Authorization": "Bearer " + userToken,
-      "Content-Type": "application/json"
-    },
-  })
-  .then(res => {
-    return res.json();
-  })
-  .then(res => {
-    console.log(res);
   })
 };
 
@@ -131,7 +122,7 @@ const captureLogin = (event) => {
   const pass = event.target[1].value;
   const masterObj = JSON.parse(localStorage.masterObj);
   if(masterObj[email] && masterObj[email].password === pass){
-    signUptoken = masterObj[email].signUpT;
+    signUpToken = masterObj[email].signUpT;
     saveUserName(masterObj[email].username);
     logIn(email, pass);
   } else {

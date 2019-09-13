@@ -16,7 +16,13 @@ const homeBtn = document.querySelector('.logo-wrap a');
 const userToken = localStorage.loginToken;
 const addUserProfile = () => {
   document.querySelector('#innerUser').innerText = localStorage.userName;
+  const masterObj = JSON.parse(localStorage.masterObj);
+  console.log(masterObj);
+  if(masterObj[localStorage.email].moreinfo){
+    updateProfile(JSON.parse(masterObj[localStorage.email].moreinfo));
+  }
 };
+
 
 const checkLogin = (page) => {
   const userHeader = document.querySelector('.userHeader');
@@ -36,7 +42,6 @@ const logOut = (event) => {
 
 checkLogin();
 addUserProfile();
-
 
 function showCommentInput(event){
   const targetArticle = event.target.closest('.post-temp');
@@ -60,7 +65,6 @@ function addCommentToDom(user, element){
   copyComment.style.display = "block";
 };
 
-// updateProfile();
 const switchPages = () => {
   const urlArry = window.location.href.split('/');
   const newUrl = urlArry.slice(0,urlArry.length-1)
@@ -71,8 +75,6 @@ const switchPages = () => {
     location.replace(newUrl + '/index.html');
   }
 };
-// Seems like when you login, the token is unique and persists
-// throughout the rest of the items that require authentication
 
 const editProfile = (event) => {
   event.preventDefault();
@@ -93,8 +95,11 @@ const editProfile = (event) => {
   })
   .then(response => response.json())
   .then(response => {
-    localStorage.userProfile = JSON.stringify(response);
-    console.log('edited Profile', response);
+    const resToJson = JSON.stringify(response)
+    const masterObj = JSON.parse(localStorage.masterObj);
+    localStorage.userProfile = resToJson;
+    masterObj[localStorage.email].moreinfo = resToJson;
+    localStorage.masterObj = JSON.stringify(masterObj);
     updateProfile();
   })
   .catch(error => {
@@ -102,8 +107,8 @@ const editProfile = (event) => {
   })
 };
 
-const updateProfile = () => {
-  const userProfile = JSON.parse(localStorage.userProfile);
+function updateProfile(userProfile = JSON.parse(localStorage.userProfile)){
+  // const userProfile = JSON.parse(localStorage.userProfile);
   // console.log(userProfile);
   if(userToken){
     document.querySelector('#innerUser').innerText =
@@ -218,21 +223,27 @@ settings.addEventListener('click', function(e){
 });
 
 
-// const getProfile = () => {
-//   fetch('http://thesi.generalassemb.ly:8080/profile', {
-//     method: 'GET',
-//     headers: {
-//       "Authorization": "Bearer " + userToken,
-//       "Content-Type": "application/json"
-//     },
-//   })
-//   .then(res => {
-//     return res.json();
-//   })
-//   .then(res => {
-//     console.log(res);
-//   })
-// };
+function getProfile(func){
+  fetch('http://thesi.generalassemb.ly:8080/profile', {
+    method: 'GET',
+    headers: {
+      "Authorization": "Bearer " + userToken,
+      "Content-Type": "application/json"
+    },
+  })
+  .then(res => {
+    return res.json();
+  })
+  .then(res => {
+    console.log(res)
+    if(func) func(res);
+  })
+  .catch(err => {
+    console.log(err)
+  })
+};
+
+
 // homeBtn.addEventListener('click', function(e){
 //   switchPages();
 // })
