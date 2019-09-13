@@ -29,8 +29,14 @@ function showCommentInput(event){
   }
 };
 
-function addComment(){
-
+function addComment(user, element){
+  const commentsArea = document.querySelector('.commentsArea');
+  const inputText = element.querySelector('.commentInput').value;
+  const commentHTML = document.querySelector('.postedComent');
+  const copyComment = commentHTML.cloneNode(true);
+  copyComment.children[0].innerText = user;
+  copyComment.children[1].firstChild.innerText = inputText;
+  commentsArea.appendChild(copyComment);
 };
 
 // updateProfile();
