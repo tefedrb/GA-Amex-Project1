@@ -122,7 +122,6 @@ function updateProfile(userProfile = JSON.parse(localStorage.userProfile)){
 
 function addPostToDom(title, description, username){
   document.querySelector('.postForm').style.display = "block";
-  console.log(event, 'alksdjflkasjflk')
   const parentNode = document.querySelector('.containerLanding');
   const postTemp = document.querySelector('.post-temp');
   const newTemp = postTemp.cloneNode(true);
@@ -247,7 +246,6 @@ const deleteComment = (id) => {
   })
 };
 
-
 function collectAllTokens(){
   // I need to use each persons token and use a loop for a request.
   const allTokens = [];
@@ -258,6 +256,8 @@ function collectAllTokens(){
   localStorage.allTokens = JSON.stringify(allTokens);
   return allTokens;
 };
+
+callAllPosts(collectAllTokens())
 
 function callAllPosts(arr){
   arr.forEach(i => {
