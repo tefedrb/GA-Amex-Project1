@@ -1,3 +1,27 @@
+.userHeader {
+  display: none;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  width: 10em;
+  height: 75px;
+}
+
+.userHeader img {
+  width: 20%;
+  border-radius: 20px;
+}
+
+.userHeader form {
+  position: relative;
+  margin: 0 auto;
+  margin-top: 1em;
+}
+
+.userHeader button {
+  cursor: pointer;
+}
+
 .container-post {
   width: 700px;
   height: 100%;

@@ -53,19 +53,6 @@ h2.sub-logo {
   font-size: .8em;
 }
 
-.userHeader {
-  display: none;
-  align-items: center;
-  justify-content: space-between;
-  width: 8em;
-  height: 100%;
-}
-
-.userHeader img {
-  width: 20%;
-  border-radius: 20px;
-}
-
 .settings-icon{
   display: none;
   right: 22em;
@@ -110,17 +97,8 @@ input {
   align-items: flex-end;
 }
 
-/* .signUpLogIn form {
-  display: flex;
-
-} */
-
 .signUpForm {
   margin-bottom: .2em;
-}
-
-.signUpForm {
-
 }
 
 .collapseInputs {
@@ -168,7 +146,7 @@ input {
   display: flex;
   flex-direction: column;
   position: relative;
-  bottom: 6em;
+  bottom: 8em;
   width: 600px;
 }
 

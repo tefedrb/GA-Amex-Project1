@@ -12,7 +12,7 @@ const logInForm = document.querySelector('.logInForm');
 
 let loginToken = localStorage.loginToken;
 let signUpToken = localStorage.signUpToken;
-
+let posts = [];
 
 const switchPages = () => {
   const urlArry = window.location.href.split('/');
@@ -26,7 +26,11 @@ const switchPages = () => {
 };
 
 const saveUserName = (user) => {
-  localStorage.userName = user
+  localStorage.userName = user;
+};
+
+const saveEmail = (email) => {
+  localStorage.email = email;
 };
 
 const signUp = (email, pass, user) => {
@@ -67,6 +71,7 @@ const newUser = (event) => {
 // Seems like when you login, the token is unique and persists
 // throughout the rest of the items that require authentication
 const logIn = (email, pass) => {
+  saveEmail(email);
   fetch('http://thesi.generalassemb.ly:8080/login', {
     method: 'POST',
     headers: {
@@ -83,6 +88,11 @@ const logIn = (email, pass) => {
     console.log('Login', response);
     loginToken = response.token;
     localStorage.loginToken = loginToken;
+    if(localStorage.signUpToken){
+      console.log('eh?')
+      addToMasterObj(email, pass, localStorage.userName, signUpToken, loginToken);
+      localStorage.removeItem('signUpToken');
+    }
     switchPages()
   })
   .catch(error => {
@@ -93,12 +103,30 @@ const logIn = (email, pass) => {
 const captureLogin = (event) => {
   event.preventDefault();
   const email = event.target[0].value;
-  const pass = event.target[0].value;
-  if(!email || !pass){
-    // ADD FRIENDLY MESSAGE
-    return
+  const pass = event.target[1].value;
+  const masterObj = JSON.parse(localStorage.masterObj);
+  if(masterObj[email] && masterObj[email].password === pass){
+    signUpToken = masterObj[email].signUpT;
+    saveUserName(masterObj[email].username);
+    logIn(email, pass);
+  } else {
+    alert('Sorry, wrong password/email');
   }
-  logIn(email, pass);
+  // Need to add a check here of our loginToken obj
+};
+
+const addToMasterObj = (email, pass, user, loginTok, signUpTok) => {
+  if(!localStorage.masterObj){
+    localStorage.masterObj = JSON.stringify({});
+  }
+  const convertedObj = JSON.parse(localStorage.masterObj);
+  convertedObj[email] = {
+    password: pass,
+    loginT: loginTok,
+    signUpT: signUpTok,
+    username: user
+  };
+  localStorage.masterObj = JSON.stringify(convertedObj);
 };
 
 setUserForm.addEventListener('mouseover', function(e){
