@@ -23,7 +23,6 @@ const addUserProfile = () => {
   }
 };
 
-
 const checkLogin = (page) => {
   const userHeader = document.querySelector('.userHeader');
   if(localStorage.loginToken){
@@ -108,8 +107,6 @@ const editProfile = (event) => {
 };
 
 function updateProfile(userProfile = JSON.parse(localStorage.userProfile)){
-  // const userProfile = JSON.parse(localStorage.userProfile);
-  // console.log(userProfile);
   if(userToken){
     document.querySelector('#innerUser').innerText =
     userProfile.user.username;
@@ -129,8 +126,6 @@ function addPostToDom(title, description){
   const parentNode = document.querySelector('.containerLanding');
   const postTemp = document.querySelector('.post-temp');
   const newTemp = postTemp.cloneNode(true);
-    // ADD USER NAME
-  // newTemp.querySelector('.messageUserName').innerText =
   newTemp.querySelector('.titleMsg').innerText = title;
   newTemp.querySelector('.message').innerText = description;
   parentNode.appendChild(newTemp);
@@ -165,6 +160,48 @@ const createPost = (event) => {
   })
 };
 
+const getCommentsById = () => {
+
+};
+
+const getPostsByUser = () => {
+  fetch('http://thesi.generalassemb.ly:8080/user/post', {
+    method: 'GET',
+    headers: {
+      "Authorization": "Bearer " + userToken,
+      "Content-Type": "application/json"
+    },
+  })
+  .then(res => {
+    return res.json();
+  })
+  .then(res => {
+    console.log(res)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+};
+
+const listAllPosts = () => {
+  fetch('http://thesi.generalassemb.ly:8080/post/list', {
+    method: 'GET',
+    headers: {
+      // "Authorization": "Bearer " + userToken,
+      "Content-Type": "application/json"
+    }
+  })
+  .then(res => {
+    return res.json();
+  })
+  .then(res => {
+    console.log(res, 'list all posts');
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+};
+
 const newComment = (event) => {
   event.preventDefault();
   console.log(event);
@@ -191,6 +228,25 @@ const newComment = (event) => {
     console.log(err);
   })
 }
+
+const getCommentsByUser = () => {
+  fetch('http://thesi.generalassemb.ly:8080/user/comment', {
+    method: 'GET',
+    headers: {
+      "Authorization": "Bearer " + userToken,
+      "Content-Type": "application/json"
+    },
+  })
+  .then(res => {
+    return res.json();
+  })
+  .then(res => {
+    console.log(res)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+};
 
 const deleteComment = () => {
   fetch('http://thesi.generalassemb.ly:8080/post/list', {
@@ -242,8 +298,3 @@ function getProfile(func){
     console.log(err)
   })
 };
-
-
-// homeBtn.addEventListener('click', function(e){
-//   switchPages();
-// })

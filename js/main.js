@@ -13,23 +13,6 @@ const logInForm = document.querySelector('.logInForm');
 let loginToken = localStorage.loginToken;
 let signUpToken = localStorage.signUpToken;
 
-
-// const checkLogin = (page) => {
-//   const userHeader = document.querySelector('.userHeader');
-//   const signUpLogin = document.querySelector('.signUpLogIn');
-//   if(localStorage.loginToken){
-//     if(page === 'index'){
-//       signUpLogin.style.display = 'none';
-//     }
-//     userHeader.style.display = 'flex';
-//     userHeader.children[1].innerText =
-//     localStorage.userName;
-//   } else if(page === 'index'){
-//     userHeader.style.display = 'none';
-//     signUpLogin.style.display = 'flex';
-//   }
-// };
-
 const switchPages = () => {
   const urlArry = window.location.href.split('/');
   const newUrl = urlArry.slice(0,urlArry.length-1)
