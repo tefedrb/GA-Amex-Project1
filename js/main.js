@@ -13,6 +13,21 @@ const logInForm = document.querySelector('.logInForm');
 let loginToken = localStorage.loginToken;
 let signUpToken = localStorage.signUpToken;
 
+// const checkLogin = (page) => {
+//   const userHeader = document.querySelector('.userHeader');
+//   const signUpLogin = document.querySelector('.signUpLogIn');
+//   if(localStorage.loginToken){
+//     if(page === 'index'){
+//       signUpLogin.style.display = 'none';
+//     }
+//     userHeader.style.display = 'flex';
+//     userHeader.children[1].innerText =
+//     localStorage.userName;
+//   } else if(page === 'index'){
+//     userHeader.style.display = 'none';
+//     signUpLogin.style.display = 'flex';
+//   }
+// };
 
 const switchPages = () => {
   const urlArry = window.location.href.split('/');
@@ -83,6 +98,10 @@ const logIn = (email, pass) => {
     console.log('Login', response);
     loginToken = response.token;
     localStorage.loginToken = loginToken;
+    if(localStorage.signUpToken){
+      addToMasterObj(email, pass, localStorage.userName, signUpToken, loginToken);
+      localStorage.removeItem(signUptoken); 
+    }
     switchPages()
   })
   .catch(error => {
@@ -90,15 +109,46 @@ const logIn = (email, pass) => {
   })
 };
 
+const getProfile = () => {
+  fetch('http://thesi.generalassemb.ly:8080/profile', {
+    method: 'GET',
+    headers: {
+      "Authorization": "Bearer " + userToken,
+      "Content-Type": "application/json"
+    },
+  })
+  .then(res => {
+    return res.json();
+  })
+  .then(res => {
+    console.log(res);
+  })
+};
+
 const captureLogin = (event) => {
   event.preventDefault();
   const email = event.target[0].value;
-  const pass = event.target[0].value;
+  const pass = event.target[1].value;
   if(!email || !pass){
     // ADD FRIENDLY MESSAGE
     return
   }
+  // Need to add a check here of our loginToken obj
   logIn(email, pass);
+};
+
+const addToMasterObj = (email, pass, user, loginTok, signUpTok) => {
+  if(!localStorage.masterObj){
+    localStorage.masterObj = JSON.stringify({});
+  }
+  const convertedObj = JSON.parse(localStorage.masterObj);
+  convertedObj[email] = {
+    password: pass,
+    loginT: loginTok,
+    signUpT: signUpTok,
+    username: user
+  };
+  localStorage.masterObj = JSON.stringify(convertedObj);
 };
 
 setUserForm.addEventListener('mouseover', function(e){

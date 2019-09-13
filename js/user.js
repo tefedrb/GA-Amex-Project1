@@ -18,26 +18,24 @@ const addUserProfile = () => {
   document.querySelector('#innerUser').innerText = localStorage.userName;
 };
 
-addUserProfile();
-
 const checkLogin = (page) => {
   const userHeader = document.querySelector('.userHeader');
-  const signUpLogin = document.querySelector('.signUpLogIn');
   if(localStorage.loginToken){
-    if(page === 'index'){
-      signUpLogin.style.display = 'none';
-    }
     userHeader.style.display = 'flex';
     userHeader.children[1].innerText =
     localStorage.userName;
-  } else if(page === 'index'){
-    userHeader.style.display = 'none';
-    signUpLogin.style.display = 'flex';
   }
 };
 
-checkLogin();
+const logOut = (event) => {
+  event.preventDefault();
+  switchPages();
+  localStorage.removeItem('userName');
+  localStorage.removeItem('loginToken');
+};
 
+checkLogin();
+addUserProfile();
 
 
 function showCommentInput(event){
@@ -189,7 +187,6 @@ const newComment = (event) => {
   })
 }
 
-
 const deleteComment = () => {
   fetch('http://thesi.generalassemb.ly:8080/post/list', {
     method: 'DELETE',
@@ -211,6 +208,7 @@ const deleteComment = () => {
   })
 };
 
+
 settings.addEventListener('click', function(e){
   if(dropDownMenu.classList.contains('create-profile-slide')){
     dropDownMenu.classList.remove('create-profile-slide');
@@ -219,6 +217,22 @@ settings.addEventListener('click', function(e){
   }
 });
 
-homeBtn.addEventListener('click', function(e){
-  switchPages();
-})
+
+// const getProfile = () => {
+//   fetch('http://thesi.generalassemb.ly:8080/profile', {
+//     method: 'GET',
+//     headers: {
+//       "Authorization": "Bearer " + userToken,
+//       "Content-Type": "application/json"
+//     },
+//   })
+//   .then(res => {
+//     return res.json();
+//   })
+//   .then(res => {
+//     console.log(res);
+//   })
+// };
+// homeBtn.addEventListener('click', function(e){
+//   switchPages();
+// })
