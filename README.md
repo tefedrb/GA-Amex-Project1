@@ -23,9 +23,11 @@ Major hurdles:
 It was challenging at times merging with out conflicts as well as
 scheduling time to access files so there wouldn't be overlap.
 We leveraged each-others strengths as best we could given time alloted.
+Spending too much time on small details in css.
+Trying to plan out workflow without a strong understanding of API.
 
 Unsolved problems:
-
+* Comments don't persist
 
 
 Deliverables Timeline:
