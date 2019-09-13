@@ -12,6 +12,7 @@ const logInForm = document.querySelector('.logInForm');
 
 let loginToken = localStorage.loginToken;
 let signUpToken = localStorage.signUpToken;
+let posts = [];
 
 const switchPages = () => {
   const urlArry = window.location.href.split('/');

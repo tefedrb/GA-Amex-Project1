@@ -41,6 +41,7 @@ const logOut = (event) => {
 
 checkLogin();
 addUserProfile();
+callAllPosts(collectAllTokens())
 
 function showCommentInput(event){
   const targetArticle = event.target.closest('.post-temp');
@@ -119,15 +120,15 @@ function updateProfile(userProfile = JSON.parse(localStorage.userProfile)){
   }
 };
 
-function addPostToDom(title, description){
+function addPostToDom(title, description, username){
   document.querySelector('.postForm').style.display = "block";
   console.log(event, 'alksdjflkasjflk')
-
   const parentNode = document.querySelector('.containerLanding');
   const postTemp = document.querySelector('.post-temp');
   const newTemp = postTemp.cloneNode(true);
   newTemp.querySelector('.titleMsg').innerText = title;
   newTemp.querySelector('.message').innerText = description;
+  newTemp.querySelector('.messageUserName').innerText = `Posted by ${username}`;
   parentNode.appendChild(newTemp);
   newTemp.style.display = 'block';
 };
@@ -162,25 +163,6 @@ const createPost = (event) => {
 
 const getCommentsById = () => {
 
-};
-
-const getPostsByUser = () => {
-  fetch('http://thesi.generalassemb.ly:8080/user/post', {
-    method: 'GET',
-    headers: {
-      "Authorization": "Bearer " + userToken,
-      "Content-Type": "application/json"
-    },
-  })
-  .then(res => {
-    return res.json();
-  })
-  .then(res => {
-    console.log(res)
-  })
-  .catch(err => {
-    console.log(err)
-  })
 };
 
 const listAllPosts = () => {
@@ -248,21 +230,17 @@ const getCommentsByUser = () => {
   })
 };
 
-const deleteComment = () => {
-  fetch('http://thesi.generalassemb.ly:8080/post/list', {
+const deleteComment = (id) => {
+  fetch('http://thesi.generalassemb.ly:8080/comment/'+id, {
     method: 'DELETE',
     headers: {
+      "Authorization": "Bearer " + userToken,
       "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      additionalEmail: additionalEmail,
-      mobile: mobile,
-      address: address
-    })
+    }
   })
   .then(response => response.json())
   .then(response => {
-    console.log('List All Posts', response);
+    console.log('uh', response);
   })
   .catch(error => {
     console.log(error);
@@ -270,14 +248,48 @@ const deleteComment = () => {
 };
 
 
-settings.addEventListener('click', function(e){
-  if(dropDownMenu.classList.contains('create-profile-slide')){
-    dropDownMenu.classList.remove('create-profile-slide');
-  } else {
-    dropDownMenu.classList.add('create-profile-slide');
+function collectAllTokens(){
+  // I need to use each persons token and use a loop for a request.
+  const allTokens = [];
+  const masterObj = JSON.parse(localStorage.masterObj);
+  for(let key in masterObj){
+    allTokens.push(masterObj[key].loginT);
   }
-});
+  localStorage.allTokens = JSON.stringify(allTokens);
+  return allTokens;
+};
 
+function callAllPosts(arr){
+  arr.forEach(i => {
+    getPostsByUser(i);
+  });
+};
+
+function postAllPosts(arr){
+  arr.forEach( i => {
+    addPostToDom(i.title, i.description, i.user.username);
+  });
+};
+
+function getPostsByUser(token){
+  fetch('http://thesi.generalassemb.ly:8080/user/post', {
+    method: 'GET',
+    headers: {
+      "Authorization": "Bearer " + token,
+      "Content-Type": "application/json"
+    },
+  })
+  .then(res => {
+    return res.json();
+  })
+  .then(res => {
+    console.log(res)
+    postAllPosts(res);
+  })
+  .catch(err => {
+    console.log(err)
+  })
+};
 
 function getProfile(func){
   fetch('http://thesi.generalassemb.ly:8080/profile', {
@@ -298,3 +310,11 @@ function getProfile(func){
     console.log(err)
   })
 };
+
+settings.addEventListener('click', function(e){
+  if(dropDownMenu.classList.contains('create-profile-slide')){
+    dropDownMenu.classList.remove('create-profile-slide');
+  } else {
+    dropDownMenu.classList.add('create-profile-slide');
+  }
+});
