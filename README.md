@@ -1,9 +1,32 @@
 # GA-Amex-Project1
 Reddit-like App
 
-mini pics -
+Team Members:
+Tefe Del Rosario-Bell
+Mariela Chavez
 
-https://api.adorable.io/avatars/47/jenny@adorable.io.png pink
-https://api.adorable.io/avatars/47/hank@adorable.io.png green
-https://api.adorable.io/avatars/47/joey@adorable.io.png
-https://api.adorable.io/avatars/47/gigo@adorable.io.png yellow
+Sketches/Wireframes:
+link:https://app.box.com/s/984rk3vt7f0w8g020ldmpn7c195af7r5
+
+Technologies Used:
+* HTML
+* CSS
+* JAVASCRIPT
+* API
+* AJAX
+* DOM
+
+Our approach was to first sketch an initial concept.
+We researched ideas and sought inspiration via images that captured our travel forum theme. The foundation of html coupled with css allowed a smooth flow into js and API.
+
+Major hurdles:
+It was challenging at times merging with out conflicts as well as
+scheduling time to access files so there wouldn't be overlap.
+We leveraged each-others strengths as best we could given time alloted.
+
+Unsolved problems:
+
+
+
+Deliverables Timeline:
+link: https://app.box.com/s/6texuyaievqmy1cpnlo6exfk15iytl7h
