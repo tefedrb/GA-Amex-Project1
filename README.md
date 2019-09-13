@@ -27,8 +27,6 @@ Spending too much time on small details in css.
 Trying to plan out workflow without a strong understanding of API.
 
 Unsolved problems:
-* Duplicate posting
-* Username not showing up on post initially
 * Comments don't persist
 
 
