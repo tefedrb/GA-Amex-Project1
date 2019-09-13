@@ -334,11 +334,7 @@ h2.sub-username {
   font-size: 1.1em;
   background-color: #edfcff;
 }
-h3.sub-titleMsg {
-  font-weight:900;
-  font-size: .8em;
-  margin-bottom: 8px;
-}
+
 p.sub-message {
   font-size: .8em;
   padding-left:10px;
