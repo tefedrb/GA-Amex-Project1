@@ -207,7 +207,7 @@ article {
   height: 100%;
   margin: 1.5em;
   box-shadow: 10px 10px 30px grey;
-  margin: 20px;
+  margin: 45px;
 }
 
 .top-bar {
@@ -220,7 +220,7 @@ article {
 
 .content {
   width: 640px;
-  padding: 1em 1.8em;
+    padding: 1em 1.8em;
 }
 
 .content img {
@@ -236,7 +236,6 @@ a.comment {
   padding-right: 20px;
   cursor: pointer;
 }
-
 
 .user-icon {
   width: 30px;
