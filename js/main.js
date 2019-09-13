@@ -100,7 +100,7 @@ const logIn = (email, pass) => {
     localStorage.loginToken = loginToken;
     if(localStorage.signUpToken){
       addToMasterObj(email, pass, localStorage.userName, signUpToken, loginToken);
-      localStorage.removeItem(signUptoken); 
+      localStorage.removeItem(signUpToken);
     }
     switchPages()
   })
@@ -129,12 +129,15 @@ const captureLogin = (event) => {
   event.preventDefault();
   const email = event.target[0].value;
   const pass = event.target[1].value;
-  if(!email || !pass){
-    // ADD FRIENDLY MESSAGE
-    return
+  const masterObj = JSON.parse(localStorage.masterObj);
+  if(masterObj[email] && masterObj[email].password === pass){
+    signUptoken = masterObj[email].signUpT;
+    saveUserName(masterObj[email].username);
+    logIn(email, pass);
+  } else {
+    alert('Sorry, wrong password/email');
   }
   // Need to add a check here of our loginToken obj
-  logIn(email, pass);
 };
 
 const addToMasterObj = (email, pass, user, loginTok, signUpTok) => {
