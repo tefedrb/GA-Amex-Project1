@@ -11,6 +11,7 @@ const logInBtn = document.querySelector('.logInBtn');
 const signUpBtn = document.querySelector('.signUpBtn');
 const signUpForm = document.querySelector('.signUpForm');
 const logInForm = document.querySelector('.logInForm');
+const homeBtn = document.querySelector('.logo-wrap a');
 
 const userToken = localStorage.loginToken;
 const addUserProfile = () => {
@@ -19,14 +20,46 @@ const addUserProfile = () => {
 
 addUserProfile();
 
-function revealComment(event){
-  const targetArticle = event.target.closest('.post-temp');
-  const commentBox = targetArticle.querySelector('.commentBox');
-  if (commentBox.style.display === "none") {
-    commentBox.style.display = "block";
-  } else {
-    commentBox.style.display = "none";
+const checkLogin = (page) => {
+  const userHeader = document.querySelector('.userHeader');
+  const signUpLogin = document.querySelector('.signUpLogIn');
+  if(localStorage.loginToken){
+    if(page === 'index'){
+      signUpLogin.style.display = 'none';
+    }
+    userHeader.style.display = 'flex';
+    userHeader.children[1].innerText =
+    localStorage.userName;
+  } else if(page === 'index'){
+    userHeader.style.display = 'none';
+    signUpLogin.style.display = 'flex';
   }
+};
+
+checkLogin();
+
+
+
+function showCommentInput(event){
+  const targetArticle = event.target.closest('.post-temp');
+  const inputWrap = targetArticle.querySelector('.inputWrap');
+  if (inputWrap.style.display === "none") {
+    inputWrap.style.display = "flex";
+  } else {
+    inputWrap.style.display = "none";
+  }
+};
+
+function addCommentToDom(user, element){
+  const inputText = element.value;
+  const commentsArea = element.closest('.commentsArea');
+  const commentHTML = document.querySelector('.postedComment');
+  const copyComment = commentHTML.cloneNode(true);
+  console.log(commentHTML, copyComment)
+  commentsArea.appendChild(copyComment);
+  copyComment.children[0].innerText = user;
+  copyComment.children[1].children[0].innerText = inputText;
+  copyComment.style.display = "block";
 };
 
 // updateProfile();
@@ -62,7 +95,9 @@ const editProfile = (event) => {
   })
   .then(response => response.json())
   .then(response => {
-    console.log('Create Profile', response);
+    localStorage.userProfile = JSON.stringify(response);
+    console.log('edited Profile', response);
+    updateProfile();
   })
   .catch(error => {
     console.log(error);
@@ -84,7 +119,7 @@ const updateProfile = () => {
   }
 };
 
-function domComments(title, description){
+function addPostToDom(title, description){
   document.querySelector('.postForm').style.display = "block";
   console.log(event, 'alksdjflkasjflk')
 
@@ -96,13 +131,14 @@ function domComments(title, description){
   newTemp.querySelector('.titleMsg').innerText = title;
   newTemp.querySelector('.message').innerText = description;
   parentNode.appendChild(newTemp);
+  newTemp.style.display = 'block';
 };
 
 const createPost = (event) => {
   event.preventDefault();
   const title = event.target.children[0].value;
   const description = event.target.children[1].value;
-  domComments(title, description);
+  addPostToDom(title, description);
   console.log(typeof title, typeof description, 'TITLE AND DESCRIPTION')
   fetch('http://thesi.generalassemb.ly:8080/post', {
     method: 'POST',
@@ -116,12 +152,43 @@ const createPost = (event) => {
     })
   })
   .then(res => {
-      console.log(res);
+    return res.json();
+  })
+  .then(res => {
+    console.log(res);
   })
   .catch((err) => {
-      console.log(err);
+    console.log(err);
   })
 };
+
+const newComment = (event) => {
+  event.preventDefault();
+  console.log(event);
+  const thisComment = event.target.querySelector('.commentInput');
+  console.log(thisComment);
+  fetch('http://thesi.generalassemb.ly:8080/comment/3', {
+    method: 'POST',
+    headers: {
+      "Authorization": "Bearer " + userToken,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      text: thisComment.value
+    })
+  })
+  .then(res => {
+    return res.json();
+  })
+  .then(res => {
+    console.log(res);
+    addCommentToDom(localStorage.userName, thisComment);
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+}
+
 
 const deleteComment = () => {
   fetch('http://thesi.generalassemb.ly:8080/post/list', {
@@ -151,3 +218,7 @@ settings.addEventListener('click', function(e){
     dropDownMenu.classList.add('create-profile-slide');
   }
 });
+
+homeBtn.addEventListener('click', function(e){
+  switchPages();
+})
