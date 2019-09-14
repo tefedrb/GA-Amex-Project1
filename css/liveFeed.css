@@ -1,0 +1,55 @@
+aside {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  right: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(218,242,80, .8);
+  transform: translateX(200%);
+  transition: all .5s ease-in-out;
+}
+
+.livePost {
+  overflow-wrap: break-word;
+  width: 30em;
+  height: auto;
+  margin-bottom: 1em;
+  border: 1px solid #0aa5ff;
+  background: #fff;
+}
+
+span.liveUser {
+  padding: .5em;
+  display: block;
+  height: 1.2em;
+  margin-bottom: .5em;
+  background: #e8f7fa;
+  font-size: 1.2em;
+}
+
+h3.liveTitle {
+  display: block;
+  font-size: 1.5em;
+  margin-left: .5em;
+  margin-bottom: .5em;
+}
+
+span.liveDescription {
+  display: block;
+  margin: 1em 1em;
+}
+
+.showAside {
+  transform: translateX(0%);
+}
+
+aside section {
+  width: 32em;
+  margin-top: 5%;
+  height: 60%;
+  overflow-y: scroll;
+}
