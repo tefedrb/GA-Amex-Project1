@@ -3,8 +3,8 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  width: 10em;
-  height: 75px;
+  width: 11em;
+  height: 80px;
 }
 
 .userHeader img {
@@ -19,8 +19,10 @@
 }
 
 .userHeader button {
+  margin: .2em;
   cursor: pointer;
 }
+
 
 .container-post {
   width: 700px;

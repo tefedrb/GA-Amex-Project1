@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/userStyles.css">
+    <link rel="stylesheet" href="css/liveFeed.css">
     <script src="https://kit.fontawesome.com/074d7b3fc9.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Anton&display=swap" rel="stylesheet">
@@ -24,11 +25,15 @@
             <img src="https://api.adorable.io/avatars/57/j@adorable.io.png" alt="user pic">
             <span></span>
             <i class="settings-icon fa fa-cogs" aria-hidden="true"></i>
+            <form onSubmit="liveFeed(event)">
+              <button type="submit">LIVE FEED</button>
+            </form>
             <form onSubmit="logOut(event)">
               <button type="submit">LOG OUT</button>
             </form>
-      </div>
+        </div>
     </header>
+
     <section class="create-profile">
       <div id="profileWrapper">
         <div class="profileInfo" id="username">
@@ -57,6 +62,15 @@
         </form>
       </div>
     </section>
+    <aside>
+      <section>
+        <div class="livePost" style="display: none;">
+          <span class="liveUser">UserName</span>
+          <h3 class="liveTitle">Title</h3>
+          <span class="liveDescription">Description</span>
+        </div>
+      </section>
+    </aside>
     <section class="create-profile">
       <div>
         <form class="profile-form" onSubmit="editProfile(event)">
@@ -66,6 +80,7 @@
         </form>
       </div>
     </section>
+
     <div class="containerLanding">
 
       <div class="container-post">

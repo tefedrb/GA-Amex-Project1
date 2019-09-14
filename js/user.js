@@ -161,7 +161,6 @@ const listAllPosts = () => {
   fetch('http://thesi.generalassemb.ly:8080/post/list', {
     method: 'GET',
     headers: {
-      // "Authorization": "Bearer " + userToken,
       "Content-Type": "application/json"
     }
   })
@@ -170,10 +169,27 @@ const listAllPosts = () => {
   })
   .then(res => {
     console.log(res, 'list all posts');
+    // allPostsIteration(res, addPostToDom);
   })
   .catch((err) => {
     console.log(err);
   })
+};
+
+const allPostsIteration = (arr, nodeFunc) => {
+  arr.forEach(i => {
+    nodeFunc(i.title, i.description, i.user.username);
+  });
+};
+
+function postGenerator(title, description, username){
+  // I need to add the comments id to div
+  const livePost = document.querySelector('.livePost');
+  const copyPost = livePost.cloneNode(true);
+
+
+  // an id tag will be added to post - look
+  // at api example in class - consider data-*
 };
 
 const newComment = (event) => {
@@ -200,6 +216,8 @@ const newComment = (event) => {
     console.log(err);
   })
 }
+
+
 
 const getCommentsByUser = () => {
   fetch('http://thesi.generalassemb.ly:8080/user/comment', {
@@ -239,6 +257,8 @@ const deleteComment = (id) => {
 
 function collectAllTokens(){
   // I need to use each persons token and use a loop for a request.
+  // This is part of the flow of things used when refreshing
+  // the page in order to recieve all posts. 
   const allTokens = [];
   const masterObj = JSON.parse(localStorage.masterObj);
   for(let key in masterObj){
@@ -248,7 +268,9 @@ function collectAllTokens(){
   return allTokens;
 };
 
-
+// This is run in order to post all local posts
+// In order for this set-up to work, we need to have
+// postAllPosts(res) taking in the response from getPostsByUser
 function callAllPosts(arr){
   arr.forEach(i => {
     getPostsByUser(i);
@@ -274,7 +296,7 @@ function getPostsByUser(token){
   })
   .then(res => {
     console.log(res);
-    postAllPosts(res);
+    // postAllPosts(res);
   })
   .catch(err => {
     console.log(err)
@@ -308,3 +330,13 @@ settings.addEventListener('click', function(e){
     dropDownMenu.classList.add('create-profile-slide');
   }
 });
+
+function liveFeed(event){
+  event.preventDefault();
+  const aside = document.querySelector('aside');
+  if(aside.classList.contains('showAside')){
+    aside.classList.remove('showAside');
+  } else {
+    aside.classList.add('showAside');
+  }
+};
