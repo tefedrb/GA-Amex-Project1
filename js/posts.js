@@ -62,7 +62,8 @@ function livePostGenerator(username, title, description, id){
   const livePost = document.querySelector('.livePost');
   const copyPost = livePost.cloneNode(true);
   copyPost.setAttribute("data-id", id);
-  copyPost.children[0].innerText = username;
+  copyPost.children[0].children[0].innerText = `User: ${username}`;
+  copyPost.children[0].children[1].innerText = `post id: ${id}`;
   copyPost.children[1].innerText = title;
   copyPost.children[2].innerText = description;
   copyPost.style.display = 'block';

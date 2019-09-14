@@ -23,8 +23,9 @@ aside {
 }
 
 span.liveUser {
+  display: flex;
+  justify-content: space-between;
   padding: .5em;
-  display: block;
   height: 1.2em;
   margin-bottom: .5em;
   background: #e8f7fa;
