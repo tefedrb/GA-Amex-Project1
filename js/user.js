@@ -40,7 +40,6 @@ checkLogin();
 // This adds userProfile from masterObj
 addUserProfile();
 // Display all posts using masterObj
-callAllPosts(collectAllTokens());
 
 function showCommentInput(event){
   const targetArticle = event.target.closest('.post-temp');
@@ -118,80 +117,6 @@ function updateProfile(userProfile = JSON.parse(localStorage.userProfile)){
   }
 };
 
-function addPostToDom(title, description, username){
-  document.querySelector('.postForm').style.display = "block";
-  const parentNode = document.querySelector('.containerLanding');
-  const postTemp = document.querySelector('.post-temp');
-  const newTemp = postTemp.cloneNode(true);
-  newTemp.querySelector('.titleMsg').innerText = title;
-  newTemp.querySelector('.message').innerText = description;
-  newTemp.querySelector('.messageUserName').innerText = `Posted by ${username}`;
-  newTemp.style.display = 'block';
-  parentNode.appendChild(newTemp);
-};
-
-const createPost = (event) => {
-  event.preventDefault();
-  const title = event.target.children[0].value;
-  const description = event.target.children[1].value;
-  addPostToDom(title, description, localStorage.userName);
-  fetch('http://thesi.generalassemb.ly:8080/post', {
-    method: 'POST',
-    headers: {
-      "Authorization": "Bearer " + userToken,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      title: title,
-      description: description
-    })
-  })
-  .then(res => {
-    return res.json();
-  })
-  .then(res => {
-    console.log(res);
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-};
-
-const listAllPosts = () => {
-  fetch('http://thesi.generalassemb.ly:8080/post/list', {
-    method: 'GET',
-    headers: {
-      "Content-Type": "application/json"
-    }
-  })
-  .then(res => {
-    return res.json();
-  })
-  .then(res => {
-    console.log(res, 'list all posts');
-    // allPostsIteration(res, addPostToDom);
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-};
-
-const allPostsIteration = (arr, nodeFunc) => {
-  arr.forEach(i => {
-    nodeFunc(i.title, i.description, i.user.username);
-  });
-};
-
-function postGenerator(title, description, username){
-  // I need to add the comments id to div
-  const livePost = document.querySelector('.livePost');
-  const copyPost = livePost.cloneNode(true);
-
-
-  // an id tag will be added to post - look
-  // at api example in class - consider data-*
-};
-
 const newComment = (event) => {
   event.preventDefault();
   const thisComment = event.target.querySelector('.commentInput');
@@ -216,8 +141,6 @@ const newComment = (event) => {
     console.log(err);
   })
 }
-
-
 
 const getCommentsByUser = () => {
   fetch('http://thesi.generalassemb.ly:8080/user/comment', {
@@ -252,54 +175,6 @@ const deleteComment = (id) => {
   })
   .catch(error => {
     console.log(error);
-  })
-};
-
-function collectAllTokens(){
-  // I need to use each persons token and use a loop for a request.
-  // This is part of the flow of things used when refreshing
-  // the page in order to recieve all posts. 
-  const allTokens = [];
-  const masterObj = JSON.parse(localStorage.masterObj);
-  for(let key in masterObj){
-    allTokens.push(masterObj[key].loginT);
-  }
-  localStorage.allTokens = JSON.stringify(allTokens);
-  return allTokens;
-};
-
-// This is run in order to post all local posts
-// In order for this set-up to work, we need to have
-// postAllPosts(res) taking in the response from getPostsByUser
-function callAllPosts(arr){
-  arr.forEach(i => {
-    getPostsByUser(i);
-  });
-};
-
-function postAllPosts(arr){
-  arr.forEach(i => {
-    addPostToDom(i.title, i.description, i.user.username);
-  });
-};
-
-function getPostsByUser(token){
-  fetch('http://thesi.generalassemb.ly:8080/user/post', {
-    method: 'GET',
-    headers: {
-      "Authorization": "Bearer " + token,
-      "Content-Type": "application/json"
-    },
-  })
-  .then(res => {
-    return res.json();
-  })
-  .then(res => {
-    console.log(res);
-    // postAllPosts(res);
-  })
-  .catch(err => {
-    console.log(err)
   })
 };
 

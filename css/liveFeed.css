@@ -14,8 +14,9 @@ aside {
 }
 
 .livePost {
+  overflow-wrap: break-word;
   width: 30em;
-  height: 25em;
+  height: auto;
   margin-bottom: 1em;
   border: 1px solid #0aa5ff;
   background: #fff;
@@ -39,7 +40,6 @@ h3.liveTitle {
 
 span.liveDescription {
   display: block;
-  overflow-wrap: break-word;
   margin: 1em 1em;
 }
 
