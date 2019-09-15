@@ -71,6 +71,21 @@
           </span>
           <h3 class="liveTitle">Title</h3>
           <span class="liveDescription">Description</span>
+          <section class="liveCommentsArea" style="display: none;">
+              <i class="far fa-comment-alt comment" onclick="showLiveComments(event)"></i>
+              <i class="fas fa-trash"></i>
+              <form class="liveInputWrap" onSubmit="newComment(event)">
+                <textarea class="liveCmmInput" placeholder="LEAVE A COMMENT..."></textarea>
+                <button class="addLiveNewCmm" type="submit">POST</button>
+              </form>
+            <div class="livePostedCmm">
+              <h2 class="liveCmmUsername">George</h2>
+              <div class="liveCmmMsg">
+                <p>Some Message</p>
+                <!-- <i class="fas fa-trash"></i> -->
+              </div>
+            </div>
+          </section>
         </div>
       </section>
     </aside>
@@ -137,5 +152,6 @@
     </footer>
     <script type="text/javascript" src="js/user.js"></script>
     <script type="text/javascript" src="js/posts.js"></script>
+    <script type="text/javascript" src="js/comments.js"></script>
   </body>
 </html>

@@ -50,16 +50,7 @@ function showCommentInput(event){
   }
 };
 
-function addCommentToDom(user, element){
-  const inputText = element.value;
-  const commentsArea = element.closest('.commentsArea');
-  const commentHTML = document.querySelector('.postedComment');
-  const copyComment = commentHTML.cloneNode(true);
-  commentsArea.appendChild(copyComment);
-  copyComment.children[0].innerText = user;
-  copyComment.children[1].children[0].innerText = inputText;
-  copyComment.style.display = "block";
-};
+// function showLiveComment;
 
 const switchPagesUser = () => {
   const urlArry = window.location.href.split('/');
@@ -87,67 +78,6 @@ function fillInProfile(userProfile = JSON.parse(localStorage.userProfile)){
     document.querySelector('#address').innerText =
     userProfile.address;
   // };
-};
-
-const newComment = (event) => {
-  event.preventDefault();
-  const thisComment = event.target.querySelector('.commentInput');
-  fetch('http://thesi.generalassemb.ly:8080/comment/3', {
-    method: 'POST',
-    headers: {
-      "Authorization": "Bearer " + userToken,
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      text: thisComment.value
-    })
-  })
-  .then(res => {
-    return res.json();
-  })
-  .then(res => {
-    console.log(res);
-    addCommentToDom(localStorage.userName, thisComment);
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-};
-
-const getCommentsByUser = () => {
-  fetch('http://thesi.generalassemb.ly:8080/user/comment', {
-    method: 'GET',
-    headers: {
-      "Authorization": "Bearer " + userToken,
-      "Content-Type": "application/json"
-    },
-  })
-  .then(res => {
-    return res.json();
-  })
-  .then(res => {
-    console.log(res);
-  })
-  .catch(err => {
-    console.log(err);
-  })
-};
-
-const deleteComment = (id) => {
-  fetch('http://thesi.generalassemb.ly:8080/comment/'+id, {
-    method: 'DELETE',
-    headers: {
-      "Authorization": "Bearer " + userToken,
-      "Content-Type": "application/json"
-    }
-  })
-  .then(response => response.json())
-  .then(response => {
-    console.log('uh', response);
-  })
-  .catch(error => {
-    alert('')
-  })
 };
 
 const createProfile = (event) => {

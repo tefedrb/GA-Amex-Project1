@@ -2,7 +2,7 @@ const createPost = (event) => {
   event.preventDefault();
   const title = event.target.children[0].value;
   const description = event.target.children[1].value;
-  addPostLocal(title, description, localStorage.userName);
+  console.log(event);
   fetch('http://thesi.generalassemb.ly:8080/post', {
     method: 'POST',
     headers: {
@@ -19,6 +19,8 @@ const createPost = (event) => {
   })
   .then(res => {
     console.log(res);
+    const id = res.id;
+    addPostLocal(title, description, localStorage.userName, id);
   })
   .catch((err) => {
     console.log(err);
@@ -100,7 +102,7 @@ function callAllPosts(arr){
 
 function postAllPosts(arr){
   arr.forEach(i => {
-    addPostLocal(i.title, i.description, i.user.username);
+    addPostLocal(i.title, i.description, i.user.username, i.id);
   });
 };
 
@@ -125,16 +127,19 @@ function getPostsByUser(token, func){
   })
 };
 
-function addPostLocal(title, description, username){
+// Need to have the post id within the html
+function addPostLocal(title, description, username, id){
   document.querySelector('.postForm').style.display = "block";
+  const referenceNode = document.querySelector('.container-post');
   const parentNode = document.querySelector('.containerLanding');
   const postTemp = document.querySelector('.post-temp');
   const newTemp = postTemp.cloneNode(true);
+  newTemp.setAttribute('data-id', id);
   newTemp.querySelector('.titleMsg').innerText = title;
   newTemp.querySelector('.message').innerText = description;
   newTemp.querySelector('.messageUserName').innerText = `Posted by ${username}`;
   newTemp.style.display = 'block';
-  parentNode.appendChild(newTemp);
+  referenceNode.parentNode.insertBefore(newTemp, referenceNode.nextSibling);
 };
 
 function liveFeed(event){
