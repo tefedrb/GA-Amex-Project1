@@ -80,7 +80,7 @@ const deleteComment = (id) => {
   })
 };
 
-const getCommentsByPostId = (id) => {
+const getCommentsByPostId = (id, func, event) => {
   fetch('http://thesi.generalassemb.ly:8080/post/' +id +'/comment', {
     method: 'GET',
     headers: {
@@ -92,12 +92,33 @@ const getCommentsByPostId = (id) => {
   })
   .then(res => {
     console.log(res);
+    if(func && event) func(res, event);
   })
   .catch(err => {
     console.log(err);
   })
 };
 
+function postComments(res, event){
+  //Need to copy nodes and paste data
+  // look for data then set up copy paste nodes
+};
+
+function showLiveComments(event){
+  const findPost = event.target.closest('.livePost');
+  const commentsArea = findPost.querySelector('.liveCommentsArea');
+  const postId = event.path[1].attributes[2].value;
+  if (commentsArea.style.display === "none") {
+    commentsArea.style.display = "block";
+    console.log(event);
+    return
+    getCommentsByPostId(postId, postComments, event);
+    console.log(event.path[1].attributes[2].value);
+  } else {
+    commentsArea.style.display = "none";
+  }
+};
+
 const loadComments = (event) => {
-  
+
 };

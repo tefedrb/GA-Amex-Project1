@@ -71,19 +71,17 @@
           </span>
           <h3 class="liveTitle">Title</h3>
           <span class="liveDescription">Description</span>
+          <i class="far fa-comment-alt showLiveCmm" onclick="showLiveComments(event)"></i>
           <section class="liveCommentsArea" style="display: none;">
-              <i class="far fa-comment-alt comment" onclick="showLiveComments(event)"></i>
-              <i class="fas fa-trash"></i>
+              <!-- <i class="fas fa-trash"></i> -->
               <form class="liveInputWrap" onSubmit="newComment(event)">
                 <textarea class="liveCmmInput" placeholder="LEAVE A COMMENT..."></textarea>
                 <button class="addLiveNewCmm" type="submit">POST</button>
               </form>
             <div class="livePostedCmm">
               <h2 class="liveCmmUsername">George</h2>
-              <div class="liveCmmMsg">
-                <p>Some Message</p>
+              <span class="liveCmmMsg">Some Message</span>
                 <!-- <i class="fas fa-trash"></i> -->
-              </div>
             </div>
           </section>
         </div>
