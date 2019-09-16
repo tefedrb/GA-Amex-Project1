@@ -11,9 +11,18 @@ const newComment = (event) => {
   event.preventDefault();
   console.log(event.path[4].dataset.id);
   // For local posts
-  const postNum = event.path[4].dataset.id;
+  let postNum = event.path[2].dataset.id;
   console.log(postNum)
-  const thisComment = event.target.querySelector('.commentInput');
+  let local = false;
+  let thisComment = event.target.querySelector('liveCmmInput');
+  thisComment = event.target.querySelector('.liveCmmInput');
+  if(event.target.querySelector('.commentInput')){
+    thisComment = event.target.querySelector('.commentInput');
+    postNum = event.path[4].dataset.id;
+    local = true;
+  };
+  console.log(thisComment, 'thisComment');
+  console.log(event, 'event')
   fetch('http://thesi.generalassemb.ly:8080/comment/'+postNum, {
     method: 'POST',
     headers: {
@@ -30,7 +39,11 @@ const newComment = (event) => {
   .then(res => {
     console.log(res, 'NEW COMMENT');
     // localCmmFindNdPaste(res, event, res.id);
-    addTrashBins(localCmmFindNdPaste(res, event, res.id));
+    if(local){
+      addTrashBins(localCmmFindNdPaste(res, event, res.id));
+    } else {
+      postLiveComment(res, event);
+    }
   })
   .catch((err) => {
     console.log(err);
@@ -119,6 +132,7 @@ function postCommentsLive(res, event){
   if(res.length < 1) return;
   const commentAreaNode = event.path[1].children[4];
   const liveComment = commentAreaNode.children[1];
+  console.log(liveComment, 'live comment');
   const referenceNode = commentAreaNode.querySelector('.liveInputWrap');
   res.forEach(comment => {
     const newNode = liveComment.cloneNode(true);
@@ -128,6 +142,19 @@ function postCommentsLive(res, event){
     newNode.setAttribute('data-id', comment.id);
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
   });
+};
+
+function postLiveComment(comment, event){
+  let commentAreaNode = event.path[1];
+  let liveComment = commentAreaNode.children[1];
+  const referenceNode = commentAreaNode.querySelector('.liveInputWrap')
+  console.log(liveComment);
+  const newNode = liveComment.cloneNode(true);
+  newNode.children[0].innerText = comment.user.username;
+  newNode.children[1].innerText = comment.text;
+  newNode.style.display = "block";
+  newNode.setAttribute('data-id', comment.id);
+  referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 };
 
 function deRenderComments(event, alt){
