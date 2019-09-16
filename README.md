@@ -27,8 +27,7 @@ Spending too much time on small details in css.
 Trying to plan out workflow without a strong understanding of API.
 
 Unsolved problems:
-* Comments don't persist
-
+* None (more time needed).
 
 Deliverables Timeline:
 link: https://app.box.com/s/6texuyaievqmy1cpnlo6exfk15iytl7h
