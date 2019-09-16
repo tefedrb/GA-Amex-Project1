@@ -102,7 +102,28 @@ const getCommentsByPostId = (id, func, event) => {
 function postComments(res, event){
   //Need to copy nodes and paste data
   // look for data then set up copy paste nodes
+  if(res.length < 1) return;
+  const commentAreaNode = event.path[1].children[4];
+  const liveComment = commentAreaNode.children[1];
+  const referenceNode = commentAreaNode.querySelector('.liveInputWrap');
+  res.forEach(comment => {
+    const newNode = liveComment.cloneNode(true);
+    newNode.children[0].innerText = comment.user.username;
+    newNode.children[1].innerText = comment.text;
+    newNode.style.display = "block";
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+  });
 };
+
+function deRenderComments(event){
+  const htmlCollection = event.path[1].children[4].children;
+  const length = htmlCollection.length;
+  let iteration = length-1
+  while(iteration > 1){
+    htmlCollection[1].remove()
+    iteration--
+  }
+}
 
 function showLiveComments(event){
   const findPost = event.target.closest('.livePost');
@@ -110,11 +131,9 @@ function showLiveComments(event){
   const postId = event.path[1].attributes[2].value;
   if (commentsArea.style.display === "none") {
     commentsArea.style.display = "block";
-    console.log(event);
-    return
     getCommentsByPostId(postId, postComments, event);
-    console.log(event.path[1].attributes[2].value);
   } else {
+    deRenderComments(event);
     commentsArea.style.display = "none";
   }
 };
