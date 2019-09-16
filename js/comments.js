@@ -125,6 +125,7 @@ function postCommentsLive(res, event){
     newNode.children[0].innerText = comment.user.username;
     newNode.children[1].innerText = comment.text;
     newNode.style.display = "block";
+    newNode.setAttribute('data-id', comment.id);
     referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
   });
 };
@@ -148,24 +149,16 @@ function showLiveComments(event){
   const findPost = event.target.closest('.livePost');
   const commentsArea = findPost.querySelector('.liveCommentsArea');
   const postId = event.path[1].attributes[2].value;
+  console.log(commentsArea.cildren, 'target')
   if (commentsArea.style.display === "none") {
     commentsArea.style.display = "block";
     getCommentsByPostId(postId, postCommentsLive, event);
+    getCommentsByUser(commentsArea.children);
   } else {
     deRenderComments(event);
     commentsArea.style.display = "none";
   }
 };
-
-function postCommentsLocal(res){
-  // if(res.length < 1) return;
-  // const commentAreaNode = event.path[3];
-  // const liveComment = commentAreaNode.children[1];
-  // const referenceNode = commentAreaNode.querySelector('.liveInputWrap');
-  // res.forEach(comment => {
-  //   getCommentsByPostId(addCommentToDom, event);
-  // });
-}
 
 function showLocalComments(event){
   const targetArticle = event.target.closest('.post-temp');
@@ -238,19 +231,23 @@ function addTrashBins(arr){
   arr.forEach(element => {
     const copy = trash.cloneNode(true);
     copy.style.display = 'block';
+    if(element.querySelector('.sub-active-icons')){
     element.querySelector('.sub-active-icons').appendChild(copy);
+    } else {
+      element.appendChild(copy);
+    }
   })
 };
 
 document.addEventListener('click', function(e){
   if(!e.target.parentNode.classList.contains('trash')) return;
-  // comment
-  console.log('yelp')
   const nestedLocalComment = e.target.parentNode.parentNode.parentNode;
-
+  const nestedLiveComment = e.target.parentNode.parentNode;
   if(nestedLocalComment.classList.contains('postedComment')){
     deleteComment(nestedLocalComment.dataset.id);
     nestedLocalComment.remove();
+  } else if(nestedLiveComment.classList.contains('livePostedCmm')){
+    deleteComment(nestedLiveComment.dataset.id)
+    nestedLiveComment.remove();
   }
-  // deleteComment()
 });
