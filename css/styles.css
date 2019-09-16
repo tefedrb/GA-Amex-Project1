@@ -192,7 +192,7 @@ article {
 }
 
 .top-bar {
-  width: 700px;
+  width: 637px;
   height: 40px;
   background-color:#edfcff;
   display: flex;
@@ -210,11 +210,11 @@ article {
 }
 
 a.comment {
+  display: block;
   font-size: 1.5em;
   color: #daf250;
   font-weight: 600;
-  margin-top: 30px;
-  padding-right: 20px;
+  padding: 0 20px 10px 20px;
   cursor: pointer;
 }
 

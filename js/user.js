@@ -40,16 +40,6 @@ const logOut = (event) => {
   localStorage.removeItem('loginToken');
 };
 
-function showCommentInput(event){
-  const targetArticle = event.target.closest('.post-temp');
-  const inputWrap = targetArticle.querySelector('.inputWrap');
-  if (inputWrap.style.display === "none") {
-    inputWrap.style.display = "flex";
-  } else {
-    inputWrap.style.display = "none";
-  }
-};
-
 // function showLiveComment;
 
 const switchPagesUser = () => {

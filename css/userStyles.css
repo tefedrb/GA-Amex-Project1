@@ -51,8 +51,7 @@
 
 article.post-temp {
   display: none;
-  width: 700px;
-  margin: 1.5em;
+  width: 637px;
   box-shadow: 10px 10px 30px grey;
   margin: 20px;
 }
@@ -76,7 +75,7 @@ h3.titleMsg {
 }
 
 .active {
-  margin: 1.5em auto;
+  margin: .5em auto;
 }
 
 textarea.description {
@@ -101,7 +100,7 @@ textarea.commentInput {
 }
 
 .postedComment {
-  width: 630px;
+  width: 607px;
   background-color: #f7f7f7;
   margin-bottom: 20px;
 }
@@ -109,6 +108,7 @@ textarea.commentInput {
 .inputWrap {
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .postedComment h2 {
@@ -133,7 +133,11 @@ span.sub-comment {
   font-size: 1.2em;
   color: #69d2ff;
   font-weight: 600;
-  margin-top: 30px;
   padding-right: 20px;
   cursor: pointer;
+}
+
+.trash {
+  display: block;
+  margin-left: 96%;
 }
