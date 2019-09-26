@@ -192,7 +192,6 @@ article {
 }
 
 .top-bar {
-  width: 637px;
   height: 40px;
   background-color:#edfcff;
   display: flex;
@@ -207,6 +206,11 @@ article {
 .content img {
   margin: 1em 0;
   width: 100%;
+}
+
+.active {
+  display: flex;
+  margin-top: 1.2em;
 }
 
 a.comment {
