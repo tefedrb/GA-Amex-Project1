@@ -23,6 +23,24 @@
   cursor: pointer;
 }
 
+.create-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+  top: 115px;
+  left: 0;
+  background: rgba(10,165,255, .8);
+  transform: translateY(-100%);
+  transition: all .5s ease-in-out;
+}
+
+.create-profile-slide {
+  transform: translateY(0);
+}
 
 .container-post {
   width: 700px;
@@ -33,8 +51,7 @@
 
 article.post-temp {
   display: none;
-  width: 700px;
-  margin: 1.5em;
+  width: 637px;
   box-shadow: 10px 10px 30px grey;
   margin: 20px;
 }
@@ -58,7 +75,7 @@ h3.titleMsg {
 }
 
 .active {
-  margin: 1.5em auto;
+  margin: .5em auto;
 }
 
 textarea.description {
@@ -83,7 +100,7 @@ textarea.commentInput {
 }
 
 .postedComment {
-  width: 630px;
+  width: 607px;
   background-color: #f7f7f7;
   margin-bottom: 20px;
 }
@@ -91,6 +108,7 @@ textarea.commentInput {
 .inputWrap {
   display: flex;
   flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .postedComment h2 {
@@ -115,7 +133,11 @@ span.sub-comment {
   font-size: 1.2em;
   color: #69d2ff;
   font-weight: 600;
-  margin-top: 30px;
   padding-right: 20px;
   cursor: pointer;
+}
+
+.trash {
+  display: block;
+  margin-left: 96%;
 }

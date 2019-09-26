@@ -119,28 +119,9 @@ input {
   display:
 }
 
-.selectedForm {
+/* .selectedForm {
   border: 3px solid #0aa5ff;
-}
-
-.create-profile {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  z-index: 1;
-  width: 100%;
-  height: 100vh;
-  top: 115px;
-  left: 0;
-  background: rgba(10,165,255, .8);
-  transform: translateY(-100%);
-  transition: all .5s ease-in-out;
-}
-
-.create-profile-slide {
-  transform: translateY(0);
-}
+} */
 
 #profileWrapper {
   display: flex;
@@ -211,7 +192,7 @@ article {
 }
 
 .top-bar {
-  width: 700px;
+  width: 637px;
   height: 40px;
   background-color:#edfcff;
   display: flex;
@@ -229,11 +210,11 @@ article {
 }
 
 a.comment {
+  display: block;
   font-size: 1.5em;
   color: #daf250;
   font-weight: 600;
-  margin-top: 30px;
-  padding-right: 20px;
+  padding: 0 20px 10px 20px;
   cursor: pointer;
 }
 

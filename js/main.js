@@ -1,9 +1,3 @@
-const userNameDOM = document.querySelector('#user');
-const classIn = document.querySelector('.email');
-const passwordIn = document.querySelector('.password');
-const userNameIn = document.querySelector('.username');
-const settings = document.querySelector('.settings-icon');
-const dropDownMenu = document.querySelector('.create-profile');
 const setUserForm = document.querySelector('.signUpLogIn');
 const logInBtn = document.querySelector('.logInBtn');
 const signUpBtn = document.querySelector('.signUpBtn');
@@ -33,8 +27,13 @@ const saveEmail = (email) => {
   localStorage.email = email;
 };
 
+const saveSignUpToken = (token) => {
+  localStorage.signUpToken = token;
+  signUpToken = token;
+};
+
+
 const signUp = (email, pass, user) => {
-  saveUserName(user)
   fetch('http://thesi.generalassemb.ly:8080/signup', {
     method: 'POST',
     headers: {
@@ -48,11 +47,18 @@ const signUp = (email, pass, user) => {
   })
   .then(response => response.json())
   .then(response => {
-    signUpToken = response.token;
-    localStorage.signUpToken = signUpToken;
+    if(response.httpStatus === 'BAD_REQUEST'){
+      alert('Username/email already used');
+      return
+    };
+    saveUserName(user);
+    saveSignUpToken(response.token);
     logIn(email, pass);
+    console.log(response, 'THE RESPONSE');
+    console.log(response.token);
   })
   .catch(error => {
+    console.log('WOOPS');
     console.log(error);
   })
 };
@@ -65,15 +71,13 @@ const newUser = (event) => {
   emailIn.includes('@') ? signUp(emailIn, passIn, userIn) :
   alert("You need to enter a valid email address");
 };
-
 // Seems like when you login, the token is unique and persists
 // throughout the rest of the items that require authentication
 const logIn = (email, pass) => {
-  saveEmail(email);
   fetch('http://thesi.generalassemb.ly:8080/login', {
     method: 'POST',
     headers: {
-      "Authorization": "Bearer " + signUpToken,
+      // "Authorization": "Bearer " + signUpToken,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -83,12 +87,17 @@ const logIn = (email, pass) => {
   })
   .then(response => response.json())
   .then(response => {
-    loginToken = response.token;
+    saveEmail(email);
+    console.log(response);
+    // Saving login token
+    loginToken = response.token
     localStorage.loginToken = loginToken;
-    if(localStorage.signUpToken){
-      addToMasterObj(email, pass, localStorage.userName, signUpToken, loginToken);
-      localStorage.removeItem('signUpToken');
+    // CAN WE USE LOGIN TOKEN TO GRAB USERNAME INFO FROM API?
+    if(signUpToken){
+      addToMasterObj(email, pass, localStorage.userName, loginToken);
     }
+    const masterObj = JSON.parse(localStorage.masterObj);
+    saveUserName(masterObj[email].username);
     switchPages();
   })
   .catch(error => {
@@ -100,17 +109,14 @@ const captureLogin = (event) => {
   event.preventDefault();
   const email = event.target[0].value;
   const pass = event.target[1].value;
-  const masterObj = JSON.parse(localStorage.masterObj);
-  if(masterObj[email] && masterObj[email].password === pass){
-    signUpToken = masterObj[email].signUpT;
-    saveUserName(masterObj[email].username);
-    logIn(email, pass);
-  } else {
-    alert('Sorry, wrong password/email');
+  if(!email || !pass){
+    alert('Email or password not recognized');
+    return
   }
+  logIn(email, pass);
 };
 
-const addToMasterObj = (email, pass, user, loginTok, signUpTok) => {
+const addToMasterObj = (email, pass, user, loginTok) => {
   if(!localStorage.masterObj){
     localStorage.masterObj = JSON.stringify({});
   }
@@ -118,7 +124,6 @@ const addToMasterObj = (email, pass, user, loginTok, signUpTok) => {
   convertedObj[email] = {
     password: pass,
     loginT: loginTok,
-    signUpT: signUpTok,
     username: user
   };
   localStorage.masterObj = JSON.stringify(convertedObj);
