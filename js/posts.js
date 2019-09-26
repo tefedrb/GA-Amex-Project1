@@ -67,12 +67,12 @@ function livePostGenerator(username, title, description, id){
   copyPost.children[0].children[1].innerText = `post id: ${id}`;
   copyPost.children[1].innerText = title;
   copyPost.children[2].innerText = description;
-  if(id /* === */){
+
   // need to create a dropDown for each post that shows comments
   // need to create a delete post function
   // append a node form to copyPost that has a submit func
   // that activates the delete post func on that post
-  }
+
   copyPost.style.display = 'block';
   document.querySelector("aside section").appendChild(copyPost);
 };
